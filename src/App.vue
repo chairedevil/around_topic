@@ -50,6 +50,7 @@
 
 <script>
 import _ from 'lodash'
+import config from './config'
 
 export default {
   name: "AroundTopic",
@@ -79,7 +80,7 @@ export default {
       if (this.isLoading) return
       this.isLoading = true
       // Lazily load input items
-      fetch('http://localhost:5000/autoplace?chr=' + val)
+      fetch( config.apiserver + 'autoplace?chr=' + val)
         .then(res => res.json())
         .then(res => {
           this.searchItems = res
@@ -89,8 +90,10 @@ export default {
         })
         .finally(() => (this.isLoading = false))
     }, 500),
-    searchModel: function (val) {
-      fetch('http://localhost:5000/getgeo?chr=' + this.searchValue)
+    searchModel: function (newVal, oldVal) {
+      if(newVal === oldVal) return
+      if(newVal === '') return
+      fetch( config.apiserver + 'getgeo?chr=' + this.searchValue)
         .then(res => res.json())
         .then(res => {
           console.log(res.candidates[0].geometry.location)
