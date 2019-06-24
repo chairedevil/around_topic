@@ -1,31 +1,109 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      disable-resize-watcher
+      temporary
+    >
+      <v-list>
+        <v-list-tile
+          v-for="menu in menus"
+          :key="menu.text"
+          @click="navigateTo(menu.route)"
+        >
+          <v-list-tile-action>
+            <v-icon>{{ menu.icon }}</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+            <v-list-tile-title>{{ menu.text }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar color="#FFF" clipped-left>
+      <v-toolbar-side-icon
+        @click="drawer = !drawer"
+      ></v-toolbar-side-icon>
+      <span class="title ml-3 mr-5"><img src="./assets/logo.png" height="35px"/></span>
+        <v-autocomplete
+          v-model="searchModel"
+          :items="searchItems"
+          :loading="searchIsLoading"
+          :search-input.sync="searchValue"
+          color="#25b7c0"
+          label="検索"
+          prepend-inner-icon="search"
+          hide-selected
+          cache-items
+          solo-inverted
+          flat
+          hide-details
+        >
+        </v-autocomplete>
+      <v-spacer></v-spacer>
+    </v-toolbar>
+    <router-view></router-view>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<script>
+import _ from 'lodash'
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+export default {
+  name: "AroundTopic",
+  data () {
+    return {
+      searchItems: [],
+      searchIsLoading: false,
+      searchValue: null,
+      searchModel: null,
+      geolocation: null,
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+      drawer: false,
+      menus: [
+        {icon: 'home', text:'Home', route:'/'},
+        {icon: 'explore', text:'Map', route:'/map'},
+        {icon: 'chat', text:'Timeline', route:'/timeline'},
+      ]
+    }
+  },
+  methods: {
+    navigateTo (route) {
+      this.$router.push(route)
+    }
+  },
+  watch: {
+    searchValue: _.debounce(function(val) {
+      if (this.isLoading) return
+      this.isLoading = true
+      // Lazily load input items
+      fetch('http://localhost:5000/autoplace?chr=' + val)
+        .then(res => res.json())
+        .then(res => {
+          this.searchItems = res
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(() => (this.isLoading = false))
+    }, 500),
+    searchModel: function (val) {
+      fetch('http://localhost:5000/getgeo?chr=' + this.searchValue)
+        .then(res => res.json())
+        .then(res => {
+          console.log(res.candidates[0].geometry.location)
+          this.geolocation = {lat:res.candidates[0].geometry.location.lat, lng:res.candidates[0].geometry.location.lng}
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 }
+</script>
+
+<style scoped>
+
 </style>
