@@ -23,25 +23,28 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="#FFF" clipped-left>
+
       <v-toolbar-side-icon
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
+
       <span class="title ml-3 mr-5"><img src="./assets/logo.png" height="35px"/></span>
-        <v-autocomplete
-          v-model="searchModel"
-          :items="searchItems"
-          :loading="searchIsLoading"
-          :search-input.sync="searchValue"
-          color="#25b7c0"
-          label="検索"
-          prepend-inner-icon="search"
-          hide-selected
-          cache-items
-          solo-inverted
-          flat
-          hide-details
-        >
-        </v-autocomplete>
+
+      <v-autocomplete
+        v-model="searchModel"
+        :items="searchItems"
+        :loading="searchIsLoading"
+        :search-input.sync="searchValue"
+        color="#25b7c0"
+        label="検索"
+        prepend-inner-icon="search"
+        hide-selected
+        cache-items
+        solo-inverted
+        flat
+        hide-details
+      >
+      </v-autocomplete>
       <v-spacer></v-spacer>
     </v-toolbar>
     <router-view></router-view>
@@ -60,7 +63,9 @@ export default {
       searchIsLoading: false,
       searchValue: null,
       searchModel: null,
-      geolocation: null,
+      searchGeolocation: null,
+      
+      nowGeolocation: null,
 
       drawer: false,
       menus: [
@@ -73,7 +78,7 @@ export default {
   methods: {
     navigateTo (route) {
       this.$router.push(route)
-    }
+    },
   },
   watch: {
     searchValue: _.debounce(function(val) {
@@ -93,15 +98,29 @@ export default {
     searchModel: function (newVal, oldVal) {
       if(newVal === oldVal) return
       if(newVal === '') return
-      fetch( config.apiserver + 'getgeo?chr=' + this.searchValue)
+      fetch( config.apiserver + 'getgeo?chr=' + this.searchModel)
         .then(res => res.json())
         .then(res => {
           console.log(res.candidates[0].geometry.location)
-          this.geolocation = {lat:res.candidates[0].geometry.location.lat, lng:res.candidates[0].geometry.location.lng}
+          this.searchGeolocation = {lat:res.candidates[0].geometry.location.lat, lng:res.candidates[0].geometry.location.lng}
+
+          this.$store.dispatch('setSearchbarValue', this.searchModel)
+          this.$store.dispatch('setSearchbarGeo', this.searchGeolocation)
         })
         .catch(err => {
           console.log(err)
         })
+    }
+  },
+  created () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log("Got current location")
+        this.nowGeolocation = {lat:position.coords.latitude, lng:position.coords.longitude};
+        this.$store.dispatch('setNowGeo', this.nowGeolocation)
+      })
+    } else {
+
     }
   }
 }
