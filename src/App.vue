@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app">
+  <v-app>
     <top-header/>
     <router-view/>
   </v-app>
@@ -11,7 +11,6 @@ export default {
   
 }
 </script>
-
 
 <style scoped>
 
