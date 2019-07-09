@@ -86,6 +86,7 @@ export default {
       fetch( config.apiserver + 'autoplace?chr=' + val)
         .then(res => res.json())
         .then(res => {
+          console.log(res)
           this.searchItems = res
         })
         .catch(err => {
