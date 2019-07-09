@@ -313,7 +313,8 @@
                     <h3>お客様の声</h3>
                 </div>
 
-                <div class="testimonials owl-carousel">
+                <carousel class="testimonials">
+                <!--<div class="testimonials owl-carousel">-->
                     <div class="testimonials-single">
                         <img src="../assets/landingPageImages/client.png" alt="client" class="client-img">
                         <blockquote class="blockquote">
@@ -341,7 +342,8 @@
                         <h5 class="mt-4 mb-2">浜一等兵</h5>
                         <p class="text-primary">United States</p>
                     </div>
-                </div>
+                <!--</div>-->
+                </carousel>
 
             </div>
 
@@ -356,12 +358,14 @@
                     <h3>アプリ　画面一覧</h3>
                 </div>
 
-                <div class="img-gallery owl-carousel owl-theme">
+                <carousel  class="img-gallery">
+                <!--<div class="img-gallery owl-carousel owl-theme">-->
                     <img src="../assets/landingPageImages/screen1.jpg" alt="image">
                     <img src="../assets/landingPageImages/screen2.jpg" alt="image">
                     <img src="../assets/landingPageImages/screen3.jpg" alt="image">
                     <img src="../assets/landingPageImages/screen1.jpg" alt="image">
-                </div>
+                <!--</div>-->
+                </carousel>
 
             </div>
 
@@ -462,18 +466,21 @@
     </div>
 </template>
 
-<script src="../assets/js/jquery-3.2.1.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/owl.carousel.min.js"></script>
 <script src="../assets/js/script.js"></script>
-
 <script>
     import '../assets/css/style.css';
     import '../assets/css/themify-icons.css';
     //import '../assets/css/owl.carousel.min.css';
     import '../assets/css/style.css';
-    export default {
 
+    import Vue from 'vue'
+    import BootstrapVue from 'bootstrap-vue'
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'bootstrap-vue/dist/bootstrap-vue.css'
+    import carousel from 'vue-owl-carousel';
+
+    export default {
+        components: { carousel }
     }
 
 
