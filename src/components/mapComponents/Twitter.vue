@@ -41,33 +41,33 @@
         methods: {
             getTwitter(lat, lng){
                 this.api = 'http://ec2-13-113-242-6.ap-northeast-1.compute.amazonaws.com/gettweet?geo=';
-                this.api = 'http://explorejapan-server.herokuapp.com/gettweet?geo=';
+                //this.api = 'http://explorejapan-server.herokuapp.com/gettweet?geo=';
                 this.tweetResult = [];
                 this.api = this.api+lat+','+lng;
                 console.log('methods: getTwitter: '+ this.api);
                 axios.get(this.api)
                 .then((response) => {
                     console.log(response.data);
-                    response.data.forEach((value, key) => {
-                    //response.statuses.data.forEach((value, key) => {
-                        if(value.coordinates){
-                            this.tweetObject = {};
-                            this.tweetUsername = value.user.name;
-                            this.tweetProfileImage = value.user.profile_image_url;
-                            this.tweetDate = value.created_at;
-                            this.tweetText = value.text;
-                            this.tweetMarkerLatitude = value.geo.coordinates[0];
-                            this.tweetMarkerLogitude = value.geo.coordinates[1];
-                            this.tweetObject = {
-                                tweetUsername: this.tweetUsername,
-                                tweetProfileImage: this.tweetProfileImage,
-                                tweetDate: this.tweetDate,
-                                tweetText: this.tweetText,
-                                tweetMarkerLatitude: this.tweetMarkerLatitude,
-                                tweetMarkerLogitude: this.tweetMarkerLogitude
-                            };
-                            this.tweetResult.push(this.tweetObject);
-                        }
+                    //response.data.forEach((value, key) => {
+                    response.data.statuses.forEach((value, key) => {
+                        if(!value.geo) return;
+                        this.tweetObject = {};
+                        this.tweetUsername = value.user.name;
+                        this.tweetProfileImage = value.user.profile_image_url;
+                        this.tweetDate = value.created_at;
+                        this.tweetText = value.text;
+                        this.tweetMarkerLatitude = value.geo.coordinates[0];
+                        this.tweetMarkerLogitude = value.geo.coordinates[1];
+                        this.tweetObject = {
+                            tweetUsername: this.tweetUsername,
+                            tweetProfileImage: this.tweetProfileImage,
+                            tweetDate: this.tweetDate,
+                            tweetText: this.tweetText,
+                            tweetMarkerLatitude: this.tweetMarkerLatitude,
+                            tweetMarkerLogitude: this.tweetMarkerLogitude
+                        };
+                        this.tweetResult.push(this.tweetObject);
+                        
                         
                     });
                     this.$emit('updateTweetResult', this.tweetResult);
