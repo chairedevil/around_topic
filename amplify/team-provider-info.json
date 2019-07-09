@@ -1,0 +1,14 @@
+{
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "aroundtopic-master-20190710020755-authRole",
+            "UnauthRoleArn": "arn:aws:iam::232089090678:role/aroundtopic-master-20190710020755-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::232089090678:role/aroundtopic-master-20190710020755-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "aroundtopic-master-20190710020755-deployment",
+            "UnauthRoleName": "aroundtopic-master-20190710020755-unauthRole",
+            "StackName": "aroundtopic-master-20190710020755",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:232089090678:stack/aroundtopic-master-20190710020755/183d0290-a26c-11e9-903d-0e819627e6da"
+        }
+    }
+}
