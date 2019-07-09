@@ -13,7 +13,7 @@ export default {
     name: 'Timeline',
     computed: {
         /*nowGeo: function(){
-            return this.$store.state.nowGeo hhhhh
+            return this.$store.state.nowGeo
         },
         searchbarGeo: function(){
             return this.$store.state.searchbarGeo
