@@ -7,6 +7,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import { VueMasonryPlugin } from 'vue-masonry'
 
 export default {
     name: 'Timeline',
