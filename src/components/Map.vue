@@ -36,6 +36,7 @@
                 <app-twitter
                     :twitterLat="lat"
                     :twitterLng="lng"
+                    :twitterGeoFilterFlag="geoFilterFlag"
                     @updateTweetResult=" markers = $event"></app-twitter>
             </template>
         </template>
@@ -70,7 +71,8 @@
                 markerObject: {},
                 markerArray: [],
                 latlngbounds: null,
-                loadingFlag: false
+                loadingFlag: false,
+                geoFilterFlag: true
             }
         },
         components: {

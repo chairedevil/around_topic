@@ -27,7 +27,8 @@
         },
         props: {
             twitterLat: String,
-            twitterLng: String
+            twitterLng: String,
+            twitterGeoFilterFlag: Boolean
         },
         mounted(){
             //console.log('getTwitter');
@@ -53,7 +54,10 @@
                     console.log(response.data);
                     //response.data.forEach((value, key) => {
                     response.data.statuses.forEach((value, key) => {
-                        if(!value.geo) return;
+                        if(this.twitterGeoFilterFlag){
+                            if(!value.geo) return;
+                        }
+                        
                         this.tweetObject = {};
                         this.tweetUsername = value.user.name;
                         this.tweetScreenname = value.user.screen_name;
