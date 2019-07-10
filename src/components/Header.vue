@@ -28,8 +28,8 @@
             @click="drawer = !drawer"
         ></v-toolbar-side-icon>
 
-        <span class="title ml-3 mr-5"><img src="../assets/logo.png" height="35px"/></span>
-
+        <span class="title ml-3 mr-5"><img v-if="$vuetify.breakpoint.name == 'md' || $vuetify.breakpoint.name == 'lg'" src="../assets/logo.png" height="35px"/></span>
+        
         <v-autocomplete
             v-model="searchModel"
             :items="searchItems"
@@ -81,12 +81,12 @@ export default {
   watch: {
     searchValue: _.debounce(function(val) {
       if (this.isLoading) return
+      if (val == '') return
       this.isLoading = true
       // Lazily load input items
       fetch( config.apiserver + 'autoplace?chr=' + val)
         .then(res => res.json())
         .then(res => {
-          console.log(res)
           this.searchItems = res
         })
         .catch(err => {
@@ -100,8 +100,8 @@ export default {
       fetch( config.apiserver + 'getgeo?chr=' + this.searchModel)
         .then(res => res.json())
         .then(res => {
-          console.log(res.candidates[0].geometry.location)
-          this.searchGeolocation = {lat:res.candidates[0].geometry.location.lat, lng:res.candidates[0].geometry.location.lng}
+          console.log("geo of searchbar value :", res.result.geometry.location)
+          this.searchGeolocation = {lat:res.result.geometry.location.lat, lng:res.result.geometry.location.lng}
 
           this.$store.dispatch('setSearchbarValue', this.searchModel)
           this.$store.dispatch('setSearchbarGeo', this.searchGeolocation)
