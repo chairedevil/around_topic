@@ -55,18 +55,29 @@
                     //response.data.forEach((value, key) => {
                     response.data.statuses.forEach((value, key) => {
                         this.geoFilterFlag = this.twitterGeoFilterFlag
+                        this.tweetObject = {};
+
                         if(this.geoFilterFlag){
                             if(!value.geo) return;
+                            this.tweetMarkerLatitude = value.geo.coordinates[0];
+                            this.tweetMarkerLogitude = value.geo.coordinates[1];
+                        }else{
+                            this.tweetMarkerLatitude = null;
+                            this.tweetMarkerLogitude = null;
                         }
                         
-                        this.tweetObject = {};
                         this.tweetUsername = value.user.name;
                         this.tweetScreenname = value.user.screen_name;
                         this.tweetProfileImage = value.user.profile_image_url;
                         this.tweetDate = value.created_at;
                         this.tweetText = value.text;
-                        this.tweetMarkerLatitude = value.geo.coordinates[0];
-                        this.tweetMarkerLogitude = value.geo.coordinates[1];
+                        if(this.geoFilterFlag){
+                            this.tweetMarkerLatitude = value.geo.coordinates[0];
+                            this.tweetMarkerLogitude = value.geo.coordinates[1];
+                        }else{
+                            this.tweetMarkerLatitude = null;
+                            this.tweetMarkerLogitude = null;
+                        }
                         this.tweetObject = {
                             tweetUsername: this.tweetUsername,
                             tweetScreenname: this.tweetScreenname,

@@ -30,6 +30,7 @@
                 <app-twitter 
                     :twitterLat="centerLat"
                     :twitterLng="centerLng"
+                    :twitterGeoFilterFlag="geoFilterFlag"
                     @updateTweetResult=" markers = $event"></app-twitter>
             </template>
             <template v-else-if="lat && lng">

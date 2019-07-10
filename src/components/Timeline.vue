@@ -14,13 +14,14 @@
         <apptwitter
             v-bind:twitterLat="lat"
             v-bind:twitterLng="lng"
+            :twitterGeoFilterFlag="geoFilterFlag"
             @updateTweetResult = "tweetResults = $event"
         >
         </apptwitter>
-
+        {{ $vuetify.breakpoint.name }}
         <div v-masonry transition-duration="0.3s" item-selector=".item">
-            <div v-masonry-tile class="item" v-for="(item, index) in tweetResults" :key="index">
-                <v-layout class="tweetCard">
+            <v-layout row wrap v-masonry-tile class="item" v-for="(item, index) in tweetResults" :key="index">
+                <v-flex class="tweetCard xs12 sm6 md4">
                     <v-avatar
                         :tile=true
                         :size="75"
@@ -34,9 +35,12 @@
                         <v-flex>
                             {{ item.tweetText }}
                         </v-flex>
+                        <v-flex mt-2>
+                            <p class="grey--text text-xs-right font-italic caption">{{ item.tweetDate.substring(0,19) }}</p>
+                        </v-flex>
                     </v-layout>
-                </v-layout>
-            </div>
+                </v-flex>
+            </v-layout>
         </div>
 
     </div>    
@@ -59,6 +63,7 @@ export default {
             lat: null,
             lng: null,
             tweetResults: null,
+            geoFilterFlag: false
         }
     },
     computed: {
@@ -69,6 +74,9 @@ export default {
             return this.$store.state.searchbarGeo
         }*/
         ...mapState(['nowGeo', 'searchbarGeo'])
+    },
+    mounted(){
+        this.geoCheck();
     },
     methods: {
         geoCheck(){
@@ -100,10 +108,11 @@ export default {
 </script>
 <style scoped>
     .tweetCard {
-        width: 400px;
-        /*background-color: antiquewhite;*/
+        width: 100%;
+        background-color: antiquewhite;
         padding: 10px;
         margin: 10px;
+        border-bottom: 1px solid rgb(224, 224, 224);
     }
     .avatar {
         border-radius: 10px;
