@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Map from './components/Map.vue'
+//import Map from './components/Map.vue'
 import Timeline from './components/Timeline.vue'
 import Home from './components/Home.vue'
 
@@ -15,11 +15,11 @@ export default new Router({
       name: 'home',
       component: Home
     },
-    {
+    /*{
       path: '/map',
       name: 'map',
       component: Map
-    },
+    },*/
     {
       path: '/timeline',
       name: 'timeline',
