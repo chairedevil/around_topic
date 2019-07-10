@@ -52,6 +52,7 @@ export default {
                 var instance = new infoWindowModel({
                     propsData: {
                         tweetUsername: this.markerPosition.tweetUsername,
+                        tweetScreenname: this.markerPosition.tweetScreenname,
                         tweetText: this.markerPosition.tweetText.substring(0, this.markerPosition.tweetText.indexOf('https')),
                         tweetProfileImage: this.markerPosition.tweetProfileImage,
                         tweetDate: this.markerPosition.tweetDate.substring(0, this.markerPosition.tweetDate.indexOf('+'))

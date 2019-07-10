@@ -6,6 +6,7 @@
     import axios from 'axios'
     //import VueAxios from 'vue-axios'
     import _ from 'lodash'
+    import { apiserver } from '../../config'
 
     //Vue.use(VueAxios, axios)
     export default {
@@ -15,6 +16,7 @@
                 tweetResult: [],
                 tweetObject: {},
                 tweetUsername: '',
+                tweetScreenname: '',
                 tweetProfileImage: '',
                 tweetDate: '',
                 tweetText: '',
@@ -42,6 +44,7 @@
             getTwitter(lat, lng){
                 this.api = 'http://ec2-13-113-242-6.ap-northeast-1.compute.amazonaws.com/gettweet?geo=';
                 //this.api = 'http://explorejapan-server.herokuapp.com/gettweet?geo=';
+                //this.api = apiserver + '/gettweet?geo=';
                 this.tweetResult = [];
                 this.api = this.api+lat+','+lng;
                 console.log('methods: getTwitter: '+ this.api);
@@ -53,6 +56,7 @@
                         if(!value.geo) return;
                         this.tweetObject = {};
                         this.tweetUsername = value.user.name;
+                        this.tweetScreenname = value.user.screen_name;
                         this.tweetProfileImage = value.user.profile_image_url;
                         this.tweetDate = value.created_at;
                         this.tweetText = value.text;
@@ -60,6 +64,7 @@
                         this.tweetMarkerLogitude = value.geo.coordinates[1];
                         this.tweetObject = {
                             tweetUsername: this.tweetUsername,
+                            tweetScreenname: this.tweetScreenname,
                             tweetProfileImage: this.tweetProfileImage,
                             tweetDate: this.tweetDate,
                             tweetText: this.tweetText,
