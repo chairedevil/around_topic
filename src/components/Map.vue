@@ -201,7 +201,7 @@
         position: relative;
     }
     .load {
-        height: 100vh;
+        height: calc(100vh - 56px);
         width: 100%;
         position: absolute;
         top: 0;
