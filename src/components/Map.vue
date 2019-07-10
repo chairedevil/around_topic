@@ -183,7 +183,6 @@
                 this.centerLng = null;
                 this.markerArray = [];
                 
-
                 if(geoObj.searchbarGeo){
                     this.lat = geoObj.searchbarGeo.lat.toString();
                     this.lng = geoObj.searchbarGeo.lng.toString();
@@ -191,7 +190,6 @@
                     this.lat = geoObj.nowGeo.lat.toString();
                     this.lng = geoObj.nowGeo.lng.toString();
                 }
-                
             }
         }
     }
@@ -201,7 +199,7 @@
         position: relative;
     }
     .load {
-        height: calc(100vh - 56px);
+        height: calc(100vh - 64px);
         width: 100%;
         position: absolute;
         top: 0;
@@ -210,7 +208,8 @@
     .v-progress-circular{
         margin: 1rem;
         position: absolute;
-        top: 50%;
+        top: calc(50% - 35px);
+        left: calc(50% - 35px);
     }
     
 </style>

@@ -61,35 +61,52 @@ export default {
 
                 instance.$mount();
                 /* 
-                this.markerContent = '<h3><img src="'+this.markerPosition.tweetProfileImage+'" class="markerImage">';
+                this.markerContent = '<div id="iw-container"><h3 class="iw-title"><img src="'+this.markerPosition.tweetProfileImage+'" class="markerImage">';
                 this.markerContent = this.markerContent + this.markerPosition.tweetUsername+'</h3>';
                 this.markerContent = this.markerContent + '<p class="markerContent">'+ this.markerPosition.tweetText.substring(0, this.markerPosition.tweetText.indexOf('https')) + '</p>';
-                this.markerContent = this.markerContent + '<p><span class="markerDate">' +this.markerPosition.tweetDate.substring(0, this.markerPosition.tweetDate.indexOf('+')) + '</span></p>';
+                this.markerContent = this.markerContent + '<p><span class="markerDate">' +this.markerPosition.tweetDate.substring(0, this.markerPosition.tweetDate.indexOf('+')) + '</span></p></div>';
                 */
                 let infoWindow = new google.maps.InfoWindow({
-                    //content: this.markerContent
+                    //content: this.markerContent,
+                    maxWidth: 500,
                     content: instance.$el
                 });
+
+                
                 
                 const vm = this;
                 google.maps.event.addListener(this.markerMap, "click", function(){
                     infoWindow.close(vm.markerMap, this);
                 });
-                /*google.maps.event.addListener(marker, "mouseover", function(){
-                    infoWindow.open(map, this);
+                /*google.maps.event.addListener(this.markerObject, "mouseover", function(){
+                    infoWindow.open(vm.markerMap, this);
                 });
-                google.maps.event.addListener(marker, "mouseout", function(){
-                    infoWindow.close(map, this);
+                google.maps.event.addListener(this.markerObject, "mouseout", function(){
+                    infoWindow.close(vm.markerMap, this);
                 });*/
                 google.maps.event.addListener(this.markerObject, "click", function(){
                     infoWindow.open(vm.markerMap, this);
                 });
-                google.maps.event.addListener(this.markerMap, "click", function(){
-                    infoWindow.close(vm.markerMap, this);
-                });
+
+                /*google.maps.event.addListener(this.markerMap, "domready", function(){
+                    vm.unwrap(document.querySelector('.gm-style-iw'));
+                });*/
 
                 this.$emit('updateMarkerObject', this.markerObject);
             },
+
+            unwrap(wrapper) {
+                console.log('unwrap');
+                // place childNodes in document fragment
+                var docFrag = document.createDocumentFragment();
+                while (wrapper.firstChild) {
+                    var child = wrapper.removeChild(wrapper.firstChild);
+                    docFrag.appendChild(child);
+                }
+
+                // replace wrapper with document fragment
+                wrapper.parentNode.replaceChild(docFrag, wrapper);
+            }
     }
 }
 </script>
@@ -105,5 +122,11 @@ export default {
         font-size: 0.8em;
         text-align: right;
         font-style: italic;
+    }
+
+    .gm-style .gm-style-iw-c, .gm-style .gm-style.iw-d, .gm-style .gm-style-iw-d::-webkit-scrollbar-track, .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece{
+        background-color: rgba(217, 217, 217, 0);
+        border: 0px;
+        box-shadow: 0px 0px 0px;
     }
 </style>

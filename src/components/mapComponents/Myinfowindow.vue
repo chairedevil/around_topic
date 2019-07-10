@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 400px">
+    <div>
         <v-card style="font-family">
             <v-layout style="background-color: #9aede4">
                     <v-flex xs3>
@@ -15,22 +15,21 @@
                         
                     </v-flex>
                     <v-flex xs9>
-                        <v-layout row>
                             <v-card-title primary-title>
-                                <div class="headline font-weight-bold mb-2">{{ tweetUsername }}</div>
+                                <v-flex xs12>
+                                    <div class="headline">{{ tweetUsername }}</div>
+                                </v-flex>
+                                <v-flex xs12>
+                                    <div class="grey--text">@{{ tweetScreenname }}</div>
+                                </v-flex>
+                                
                             </v-card-title>
-                        </v-layout>
-                        <v-layout row>
-                            <v-card-title primary-title>
-                                <div class="body-1 grey--text">@{{ tweetScreenname }}</div>
-                            </v-card-title>
-                        </v-layout>
+                            
                     </v-flex>
-                
             </v-layout>
                 
                     <v-card-text>
-                        <div class="body-2">{{ tweetText }}</div>
+                        <div class="subheading">{{ tweetText }}</div>
                     </v-card-text>
                 <v-spacer></v-spacer>
                     <v-layout wrap>
