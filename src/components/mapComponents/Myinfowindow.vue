@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card style="font-family">
-            <v-layout>
+            <v-layout style="background-color: #9aede4">
                     <v-flex xs3>
                         <v-layout align-center justify-center fill-height>
                             <v-img
@@ -17,7 +17,7 @@
                     <v-flex xs9>
                             <v-card-title primary-title>
                                 <v-flex xs12>
-                                    <div class="headline font-weight-bold">{{ tweetUsername }}</div>
+                                    <div class="headline">{{ tweetUsername }}</div>
                                 </v-flex>
                                 <v-flex xs12>
                                     <div class="grey--text">@{{ tweetScreenname }}</div>
@@ -29,7 +29,7 @@
             </v-layout>
                 
                     <v-card-text>
-                        <div class="body-2">{{ tweetText }}</div>
+                        <div class="subheading">{{ tweetText }}</div>
                     </v-card-text>
                 <v-spacer></v-spacer>
                     <v-layout wrap>

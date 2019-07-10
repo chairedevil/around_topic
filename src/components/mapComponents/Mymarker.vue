@@ -78,17 +78,14 @@ export default {
                 google.maps.event.addListener(this.markerMap, "click", function(){
                     infoWindow.close(vm.markerMap, this);
                 });
-                /*google.maps.event.addListener(marker, "mouseover", function(){
-                    infoWindow.open(map, this);
+                /*google.maps.event.addListener(this.markerObject, "mouseover", function(){
+                    infoWindow.open(vm.markerMap, this);
                 });
-                google.maps.event.addListener(marker, "mouseout", function(){
-                    infoWindow.close(map, this);
+                google.maps.event.addListener(this.markerObject, "mouseout", function(){
+                    infoWindow.close(vm.markerMap, this);
                 });*/
                 google.maps.event.addListener(this.markerObject, "click", function(){
                     infoWindow.open(vm.markerMap, this);
-                });
-                google.maps.event.addListener(this.markerMap, "click", function(){
-                    infoWindow.close(vm.markerMap, this);
                 });
 
                 /*google.maps.event.addListener(this.markerMap, "domready", function(){
@@ -127,7 +124,9 @@ export default {
         font-style: italic;
     }
 
-    /*.gm-style .gm-style-iw-c{
-        padding: 0;
-    }*/
+    .gm-style .gm-style-iw-c, .gm-style .gm-style.iw-d, .gm-style .gm-style-iw-d::-webkit-scrollbar-track, .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece{
+        background-color: rgba(217, 217, 217, 0);
+        border: 0px;
+        box-shadow: 0px 0px 0px;
+    }
 </style>
