@@ -94,6 +94,7 @@
                 this.map.setZoom(13);
             },
             centerLat(){
+                this.loadingFlag = true;
                 this.markerArray.forEach((value, index) => {
                 value.setMap(null);
                 });

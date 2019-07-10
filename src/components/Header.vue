@@ -22,7 +22,7 @@
             </v-list-tile>
         </v-list>
         </v-navigation-drawer>
-        <v-toolbar color="#FFF" clipped-left>
+        <v-toolbar color="#FFF" clipped-left class="topToolbar">
 
           <v-toolbar-side-icon
               @click="drawer = !drawer"
@@ -31,7 +31,7 @@
           <span v-if="$vuetify.breakpoint.name == 'md' || $vuetify.breakpoint.name == 'lg'" class="title ml-3 mr-5">
             <img src="../assets/logo.png" height="35px"/>
           </span>
-          
+
           <v-autocomplete
               v-model="searchModel"
               :items="searchItems"
@@ -47,6 +47,7 @@
               hide-details
           >
           </v-autocomplete>
+          
         </v-toolbar>
     </div>
 </template>
@@ -126,5 +127,7 @@ export default {
 }
 </script>
 <style scoped>
-
+  .searchbar{
+    width: 100%;
+  }
 </style>

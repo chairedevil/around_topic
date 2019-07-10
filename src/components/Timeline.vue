@@ -12,37 +12,48 @@
             </apptwitter> 
         </template> -->
         <apptwitter
-            v-bind:twitterLat="lat"
-            v-bind:twitterLng="lng"
+            v-if="lat != null & lng != null"
+            :twitterLat="lat"
+            :twitterLng="lng"
             :twitterGeoFilterFlag="geoFilterFlag"
             @updateTweetResult = "tweetResults = $event"
         >
         </apptwitter>
-        {{ $vuetify.breakpoint.name }}
+        <div v-if="loadingFlg" class="loadingProcess">
+            <v-progress-circular
+                :size="70"
+                indeterminate
+                color="primary"
+            ></v-progress-circular>
+        </div>
+
         <div v-masonry transition-duration="0.3s" item-selector=".item">
-            <v-layout row wrap v-masonry-tile class="item" v-for="(item, index) in tweetResults" :key="index">
-                <v-flex class="tweetCard xs12 sm6 md4">
-                    <v-avatar
-                        :tile=true
-                        :size="75"
-                    >
-                        <img :src="item.tweetProfileImage" class="avatar"> 
-                    </v-avatar>
-                    <v-layout ml-3 column>
-                        <v-flex>
-                            <b>{{ item.tweetUsername }} @{{ item.tweetScreenname }}</b>
-                        </v-flex>
-                        <v-flex>
-                            {{ item.tweetText }}
-                        </v-flex>
-                        <v-flex mt-2>
-                            <p class="grey--text text-xs-right font-italic caption">{{ item.tweetDate.substring(0,19) }}</p>
-                        </v-flex>
-                    </v-layout>
+            <v-layout wrap mt-2>
+                <v-flex xs12 sm6 md4 class="tweetCard item" v-masonry-tile v-for="(item, index) in tweetResults" :key="index">
+                    <div class="tweetContain">
+                        <v-avatar
+                            :tile=true
+                            :size="75"
+                        >
+                            <img :src="item.tweetProfileImage" class="avatar"> 
+                        </v-avatar>
+                        <v-layout ml-3 column>
+                            <v-flex>
+                                <b>{{ item.tweetUsername }} (@{{ item.tweetScreenname }})</b>
+                            </v-flex>
+                            <v-flex>
+                                {{ item.tweetText }}
+                            </v-flex>
+                            <v-flex mt-2>
+                                <p class="grey--text font-italic text-xs-right caption timestamp">{{ item.tweetDate.substring(0,19) }}</p>
+                            </v-flex>
+                        </v-layout>
+                    </div>
                 </v-flex>
             </v-layout>
         </div>
-
+        
+    
     </div>    
 </template>
 <script>
@@ -63,7 +74,8 @@ export default {
             lat: null,
             lng: null,
             tweetResults: null,
-            geoFilterFlag: false
+            geoFilterFlag: false,
+            loadingFlg: true,
         }
     },
     computed: {
@@ -76,10 +88,12 @@ export default {
         ...mapState(['nowGeo', 'searchbarGeo'])
     },
     mounted(){
-        this.geoCheck();
+        if(this.nowGeo!=null) this.geoCheck();
     },
     methods: {
         geoCheck(){
+            this.loadingFlg = true
+
             if(this.searchbarGeo){
                 console.log(this.searchbarGeo.lat);
                 this.lat = this.searchbarGeo.lat.toString();
@@ -102,6 +116,7 @@ export default {
         },
         tweetResults(newVal, oldVal){
             console.log(newVal);
+            this.loadingFlg = false
         }
     }
 }
@@ -109,12 +124,27 @@ export default {
 <style scoped>
     .tweetCard {
         width: 100%;
-        background-color: antiquewhite;
         padding: 10px;
-        margin: 10px;
+    }
+    .tweetContain{
+        padding: 5px;
         border-bottom: 1px solid rgb(224, 224, 224);
+        display: flex;
     }
     .avatar {
         border-radius: 10px;
+    }
+    .timestamp{
+        margin: 10px 0;
+    }
+    .loadingProcess{
+        position: fixed;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: calc(100vh - 65px);
+        background-color: rgba(217, 217, 217, 0.3);
     }
 </style>
