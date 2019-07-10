@@ -24,28 +24,29 @@
         </v-navigation-drawer>
         <v-toolbar color="#FFF" clipped-left>
 
-        <v-toolbar-side-icon
-            @click="drawer = !drawer"
-        ></v-toolbar-side-icon>
+          <v-toolbar-side-icon
+              @click="drawer = !drawer"
+          ></v-toolbar-side-icon>
 
-        <span class="title ml-3 mr-5"><img v-if="$vuetify.breakpoint.name == 'md' || $vuetify.breakpoint.name == 'lg'" src="../assets/logo.png" height="35px"/></span>
-        
-        <v-autocomplete
-            v-model="searchModel"
-            :items="searchItems"
-            :loading="searchIsLoading"
-            :search-input.sync="searchValue"
-            color="#25b7c0"
-            label="検索"
-            prepend-inner-icon="search"
-            hide-selected
-            cache-items
-            solo-inverted
-            flat
-            hide-details
-        >
-        </v-autocomplete>
-        <v-spacer></v-spacer>
+          <span v-if="$vuetify.breakpoint.name == 'md' || $vuetify.breakpoint.name == 'lg'" class="title ml-3 mr-5">
+            <img src="../assets/logo.png" height="35px"/>
+          </span>
+          
+          <v-autocomplete
+              v-model="searchModel"
+              :items="searchItems"
+              :loading="searchIsLoading"
+              :search-input.sync="searchValue"
+              color="#25b7c0"
+              label="検索"
+              prepend-inner-icon="search"
+              hide-selected
+              cache-items
+              solo-inverted
+              flat
+              hide-details
+          >
+          </v-autocomplete>
         </v-toolbar>
     </div>
 </template>
