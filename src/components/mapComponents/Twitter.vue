@@ -22,7 +22,7 @@
                 tweetText: '',
                 tweetMarkerLatitude: '',
                 tweetMarkerLogitude: '',
-
+                geoFilterFlag: true
             }
         },
         props: {
@@ -54,7 +54,8 @@
                     console.log(response.data);
                     //response.data.forEach((value, key) => {
                     response.data.statuses.forEach((value, key) => {
-                        if(this.twitterGeoFilterFlag){
+                        this.geoFilterFlag = this.twitterGeoFilterFlag
+                        if(this.geoFilterFlag){
                             if(!value.geo) return;
                         }
                         
