@@ -1,5 +1,5 @@
 export default {
-    apiserver : 'http://api.around-topic.com/'
+    apiserver : 'https://api.around-topic.com/'
 }
 
 //apiserver : 'https://explorejapan-server.herokuapp.com/',
