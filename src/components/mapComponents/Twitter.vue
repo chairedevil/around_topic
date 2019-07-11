@@ -68,7 +68,7 @@
                         
                         this.tweetUsername = value.user.name;
                         this.tweetScreenname = value.user.screen_name;
-                        this.tweetProfileImage = value.user.profile_image_url;
+                        this.tweetProfileImage = value.user.profile_image_url_https;
                         this.tweetDate = value.created_at;
                         this.tweetText = value.text;
                         if(this.geoFilterFlag){
