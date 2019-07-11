@@ -6,7 +6,7 @@
     import axios from 'axios'
     //import VueAxios from 'vue-axios'
     import _ from 'lodash'
-    import { apiserver } from '../../config'
+    import config from '../../config'
 
     //Vue.use(VueAxios, axios)
     export default {
@@ -43,9 +43,9 @@
         },
         methods: {
             getTwitter(lat, lng){
-                this.api = 'http://ec2-13-113-242-6.ap-northeast-1.compute.amazonaws.com/gettweet?geo=';
+                //this.api = 'http://ec2-13-113-242-6.ap-northeast-1.compute.amazonaws.com/gettweet?geo=';
                 //this.api = 'http://explorejapan-server.herokuapp.com/gettweet?geo=';
-                //this.api = apiserver + '/gettweet?geo=';
+                this.api = config.apiserver + '/gettweet?geo=';
                 this.tweetResult = [];
                 this.api = this.api+lat+','+lng;
                 console.log('methods: getTwitter: '+ this.api);
