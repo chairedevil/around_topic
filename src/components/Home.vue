@@ -469,7 +469,6 @@
     import '../assets/css/style.css';
     import '../assets/css/themify-icons.css';
     //import '../assets/css/owl.carousel.min.css';
-    import '../assets/css/style.css';
 
     import Vue from 'vue'
     import BootstrapVue from 'bootstrap-vue'
@@ -480,7 +479,6 @@
     export default {
         components: { carousel }
     }
-
 
 </script>
 
