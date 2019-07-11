@@ -45,7 +45,7 @@
             getTwitter(lat, lng){
                 //this.api = 'http://ec2-13-113-242-6.ap-northeast-1.compute.amazonaws.com/gettweet?geo=';
                 //this.api = 'http://explorejapan-server.herokuapp.com/gettweet?geo=';
-                this.api = config.apiserver + '/gettweet?geo=';
+                this.api = config.apiserver + 'gettweet?geo=';
                 this.tweetResult = [];
                 this.api = this.api+lat+','+lng;
                 console.log('methods: getTwitter: '+ this.api);
