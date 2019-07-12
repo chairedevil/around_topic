@@ -65,7 +65,10 @@ export default {
       searchModel: null,
       searchGeolocation: null,
       
-      nowGeolocation: null,
+      nowGeolocation: {
+        lat: 35.690112,
+        lng: 139.700460
+      },
 
       drawer: false,
       menus: [
@@ -114,6 +117,7 @@ export default {
     }
   },
   created () {
+    console.log("Header component was created")
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         console.log("Got current location")
@@ -121,7 +125,8 @@ export default {
         this.$store.dispatch('setNowGeo', this.nowGeolocation)
       })
     } else {
-
+      console.log("Set geo with default value(shinjuku station)")
+      this.$store.dispatch('setNowGeo', this.nowGeolocation)
     }
   }
 }

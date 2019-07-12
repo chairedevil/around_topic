@@ -102,9 +102,9 @@
             },
             loadingFlag(){
                 if(this.loadingFlag){
-                    console.log('loading');
+                    //console.log('loading');
                 }else{
-                    console.log('loading done');
+                    //console.log('loading done');
                 }
             },
             geoCheck(newVal, oldVal){
