@@ -16,6 +16,7 @@
         props: {
             mapLat: String,
             mapLng: String,
+            mapScreenname,
             mapMap: Object
         },
         components: {
@@ -69,8 +70,10 @@
                 google.maps.event.addListener(this.map, 'dragend', function(){
                     this.mapCenter = vm.map.getCenter();
                     //console.log(vm.map.mapCenter.lat()+" + "+vm.map.mapCenter.lng());
-                    vm.$emit('updateLat',vm.map.mapCenter.lat().toString());
-                    vm.$emit('updateLng',vm.map.mapCenter.lng().toString());
+                    if(!vm.mapScreenname){
+                        vm.$emit('updateLat',vm.map.mapCenter.lat().toString());
+                        vm.$emit('updateLng',vm.map.mapCenter.lng().toString());
+                    }
                 });
                 console.log('createMap');
                 

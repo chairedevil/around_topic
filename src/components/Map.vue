@@ -6,6 +6,7 @@
                 :mapLat="lat"
                 :mapLng="lng"
                 :mapMap="map"
+                :mapScreenname="screenname"
                 @updateMap="map = $event"
                 @updateLat="centerLat = $event"
                 @updateLng="centerLng = $event">
@@ -26,7 +27,15 @@
         </div>
           
         <template v-if="lat && lng">
-            <template v-if="centerLat && centerLng">
+            <template v-if="screenname">
+                <app-twitter 
+                    :twitterLat="centerLat"
+                    :twitterLng="centerLng"
+                    :twitterScreenname="screenname"
+                    :twitterGeoFilterFlag="geoFilterFlag"
+                    @updateTweetResult=" markers = $event"></app-twitter>
+            </template>
+            <template v-else-if="centerLat && centerLng">
                 <app-twitter 
                     :twitterLat="centerLat"
                     :twitterLng="centerLng"
@@ -65,6 +74,7 @@
             return {
                 lat: null,
                 lng: null,
+                screenname: null,
                 centerLat: null,
                 centerLng: null,
                 map: null,
@@ -144,8 +154,12 @@
         },
         mounted() {
             //console.log('mounted');
-            if(this.$store.state.nowGeo || this.$store.state.searchbarGeo){
-                this.setLatLngValue(this.$store.state);
+            if(this.$store.state.nowGeo || this.$store.state.searchbarGeo || this.$store.state.twitterScreenname){
+                if(this.$store.state.searchbarValue){
+                    this.screenname = this.$store.state.twitterScreenname;
+                }else{
+                    this.setLatLngValue(this.$store.state);
+                }
             }
             
             /*this.$store.watch(
