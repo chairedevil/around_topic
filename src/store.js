@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     nowGeo: null,
     searchbarValue: null,
-    searchbarGeo: null
+    searchbarGeo: null,
+    twitterScreenname: null
   },
   mutations: {
     setNowGeo (state, nowGeo) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     setSearchbarGeo (state, searchbarGeo) {
       state.searchbarGeo = searchbarGeo
+    },
+    setTwitterScreenname (state, twitterScreenname) {
+      state.twitterScreenname = twitterScreenname
     }
   },
   actions: {
@@ -30,6 +34,9 @@ export default new Vuex.Store({
     },
     setSearchbarGeo ({commit}, searchbarGeo) {
       commit('setSearchbarGeo', searchbarGeo)
+    },
+    setSearchbarGeo ({commit}, twitterScreenname) {
+      commit('setTwitterScreenname', twitterScreenname)
     }
   }
 })
