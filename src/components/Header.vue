@@ -107,7 +107,8 @@ export default {
         .then(res => {
           console.log("geo of searchbar value :", res.result.geometry.location)
           this.searchGeolocation = {lat:res.result.geometry.location.lat, lng:res.result.geometry.location.lng}
-
+          
+          this.$store.dispatch('setTwitterScreenname', null)
           this.$store.dispatch('setSearchbarValue', this.searchModel)
           this.$store.dispatch('setSearchbarGeo', this.searchGeolocation)
         })

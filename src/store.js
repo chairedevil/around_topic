@@ -35,7 +35,7 @@ export default new Vuex.Store({
     setSearchbarGeo ({commit}, searchbarGeo) {
       commit('setSearchbarGeo', searchbarGeo)
     },
-    setSearchbarGeo ({commit}, twitterScreenname) {
+    setTwitterScreenname ({commit}, twitterScreenname) {
       commit('setTwitterScreenname', twitterScreenname)
     }
   }
