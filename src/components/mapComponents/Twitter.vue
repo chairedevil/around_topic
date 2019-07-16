@@ -28,11 +28,12 @@
         props: {
             twitterLat: String,
             twitterLng: String,
+            twitterScreenname: String,
             twitterGeoFilterFlag: Boolean
         },
         mounted(){
             //console.log('getTwitter');
-            this.getTwitter(this.twitterLat, this.twitterLng);
+            this.getTwitter(this.twitterLat, this.twitterLng, this.twitterScreenname);
             
         },
         watch: {
@@ -42,13 +43,20 @@
             }, 2000)
         },
         methods: {
-            getTwitter(lat, lng){
+            getTwitter(lat, lng, screenname){
                 //this.api = 'http://ec2-13-113-242-6.ap-northeast-1.compute.amazonaws.com/gettweet?geo=';
                 //this.api = 'http://explorejapan-server.herokuapp.com/gettweet?geo=';
-                this.api = config.apiserver + 'gettweet?geo=';
+                if(screenname){
+                    this.api = config.apiserver + 'gettweet?screen_name=';
+                    this.api = this.api+screenname;
+                }else if(lat && lng){
+                    this.api = config.apiserver + 'gettweet?geo=';
+                    this.api = this.api+lat+','+lng;
+                }
+                
                 this.tweetResult = [];
-                this.api = this.api+lat+','+lng;
                 console.log('methods: getTwitter: '+ this.api);
+
                 axios.get(this.api)
                 .then((response) => {
                     console.log(response.data);
@@ -71,6 +79,7 @@
                         this.tweetProfileImage = value.user.profile_image_url_https;
                         this.tweetDate = value.created_at;
                         this.tweetText = value.text;
+                        
                         if(this.geoFilterFlag){
                             this.tweetMarkerLatitude = value.geo.coordinates[0];
                             this.tweetMarkerLogitude = value.geo.coordinates[1];
