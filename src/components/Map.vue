@@ -98,6 +98,9 @@
                     this.markerArray.forEach((value, index) => {
                         value.setMap(this.map);
                         console.log('drawMarker');
+                        if(this.screennmae){
+                            //this.drawLine();
+                        }
                     });
                 }
                 this.centerPointer();
@@ -106,7 +109,7 @@
             centerLat(){
                 this.loadingFlag = true;
                 this.markerArray.forEach((value, index) => {
-                value.setMap(null);
+                    value.setMap(null);
                 });
                 this.markerArray = [];
             },
@@ -208,6 +211,16 @@
                     this.lat = geoObj.nowGeo.lat.toString();
                     this.lng = geoObj.nowGeo.lng.toString();
                 }
+            },
+            drawLine(){
+                let lineCoordinates = [];
+                var flightPath = new google.maps.Polyline({
+                    path: lineCoordinates,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
             }
         }
     }
