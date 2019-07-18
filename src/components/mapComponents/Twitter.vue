@@ -32,22 +32,23 @@
             twitterGeoFilterFlag: Boolean
         },
         mounted(){
-            //console.log('getTwitter');
+            
             this.getTwitter(this.twitterLat, this.twitterLng, this.twitterScreenname);
             
         },
         watch: {
             twitterLat: _.debounce(function(){
                 //console.log('watch getTwitter '+this.twitterLat, this.twitterLng);
-                this.getTwitter(this.twitterLat, this.twitterLng);
+                this.getTwitter(this.twitterLat, this.twitterLng, this.twitterScreenname);
             }, 2000)
         },
         methods: {
             getTwitter(lat, lng, screenname){
+                console.log('getTwitter: '+lat, lng, screenname);
                 //this.api = 'http://ec2-13-113-242-6.ap-northeast-1.compute.amazonaws.com/gettweet?geo=';
                 //this.api = 'http://explorejapan-server.herokuapp.com/gettweet?geo=';
                 if(screenname){
-                    this.api = config.apiserver + 'gettweet?screen_name=';
+                    this.api = config.apiserver + 'gettimeline?screen_name=';
                     this.api = this.api+screenname;
                 }else if(lat && lng){
                     this.api = config.apiserver + 'gettweet?geo=';
@@ -61,7 +62,13 @@
                 .then((response) => {
                     console.log(response.data);
                     //response.data.forEach((value, key) => {
-                    response.data.statuses.forEach((value, key) => {
+                    let responseObject;
+                    if(screenname){
+                        responseObject = response.data;
+                    }else{
+                        responseObject = response.data.statuses;
+                    }
+                    responseObject.forEach((value, key) => {
                         this.geoFilterFlag = this.twitterGeoFilterFlag
                         this.tweetObject = {};
 
