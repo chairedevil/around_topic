@@ -19,7 +19,7 @@
                                 <v-flex xs12>
                                     <div class="headline">{{ tweetUsername }}</div>
                                 </v-flex>
-                                <v-flex xs12>
+                                <v-flex xs12 @click="storeScreenname">
                                     <div class="grey--text">@{{ tweetScreenname }}</div>
                                 </v-flex>
                                 
@@ -51,7 +51,13 @@ export default {
         'tweetText',
         'tweetProfileImage',
         'tweetDate'
-    ]
+    ],
+    methods: {
+        storeScreenname: () => {
+            console.log('storeScreenname: '+this.tweetScreenname);
+            this.$store.dispatch('setTwitterScreenname', this.tweetScreenname);
+        }
+    }
 }
 </script>
 <style scoped>
