@@ -106,18 +106,17 @@
                     }
                     this.centerPointer();
                 }
-                
-                //this.map.setZoom(13);
             },
             centerLat(){
                 this.loadingFlag = true;
                 this.markerArray.forEach((value, index) => {
                     value.setMap(null);
                 });
-                this.markerArray = [];
-                if(this.flightPath){
+                //this.markerArray = [];
+                /*if(this.flightPath){
                     this.flightPath.setMap(null);
-                }
+                }*/
+                this.clearMarker();
             },
             loadingFlag(){
                 if(this.loadingFlag){
@@ -143,8 +142,6 @@
             }
         },
         created() {
-            
-
             axios.interceptors.request.use((config) => {
                 this.loadingFlag = true;
                 return config;
@@ -160,36 +157,12 @@
                 
                 return Promise.reject(error);
             });
-
         },
         mounted() {
             //console.log('mounted');
             if(this.$store.state.nowGeo || this.$store.state.searchbarGeo || this.$store.state.twitterScreenname){
                 this.setLatLngValue(this.$store.state);
-                /*if(this.$store.state.twitterScreenname){
-                    this.screenname = this.$store.state.twitterScreenname;
-                }else{
-                    this.setLatLngValue(this.$store.state);
-                }*/
             }
-            
-            /*this.$store.watch(
-                (state) => state,
-                function(newVal, oldVal){
-                    if(newVal.searchbarGeo){
-                        this.lat = newVal.searchbarGeo.lat;
-                        this.lng = newVal.searchbarGeo.lng;
-                        console.log('searchBarGeo: '+this.lat, this.lng);
-                    }else{
-                        this.lat = newVal.nowGeo.lat;
-                        this.lng = newVal.nowGeo.lng;
-                        console.log('nowGeo: '+this.lat, this.lng);
-                    }
-                },
-                {
-                    deep: true
-                }
-            )*/
         },
         methods: {
             centerPointer(){
@@ -207,9 +180,13 @@
                 this.markerArray.forEach((value, index) => {
                     value.setMap(null);
                 });
+                if(this.flightPath){
+                    this.flightPath.setMap(null);
+                }
             },
             setLatLngValue(geoObj){
                 console.log('setLatLng');
+                this.clearMarker();
                 this.centerLat = null;
                 this.centerLng = null;
                 this.screenname = null;
@@ -261,13 +238,13 @@
                             icon: symbol,
                             offset: '0%'
                         },
-                        /*{
+                        {
                             icon: {
                                 path: google.maps.SymbolPath.CIRCLE,
                                 scale: 5
                             },
                             offset: '0%'
-                        },*/
+                        },
                         {
                             icon: {
                                 path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
