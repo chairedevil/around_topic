@@ -16,7 +16,7 @@
         props: {
             mapLat: String,
             mapLng: String,
-            mapScreenname,
+            mapScreenname: String,
             mapMap: Object
         },
         components: {
