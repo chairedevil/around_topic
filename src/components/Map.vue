@@ -102,6 +102,7 @@
                     if(this.screenname){
                         this.drawLine();
                         this.flightPath.setMap(this.map);
+                        this.animateCircle(this.flightPath);
                     }
                     this.centerPointer();
                 }
@@ -237,14 +238,51 @@
                     })
                 })
                 
+                const symbol = {
+                    path: 'M 10,8 5,0 -8,0 -10,5 -7,5 -7,8 6,8 6,7z',
+                    strokeColor: '#F00',
+                    fillColor: '#F00',
+                    fillOpacity: 1,
+                    rotation: -90
+                };
                 this.flightPath = new google.maps.Polyline({
-                    path: lineCoordinates,
+                    path: lineCoordinates.reverse(),
                     geodesic: true,
                     strokeColor: '#ffab66',
                     strokeOpacity: 1.0,
-                    strokeWeight: 2
+                    strokeWeight: 2,
+                    icons: [
+                        {
+                            icon: symbol,
+                            offset: '0%'
+                        },
+                        /*{
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 5
+                            },
+                            offset: '0%'
+                        },*/
+                        {
+                            icon: {
+                                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                                scale: 5
+                            },
+                            offset: '100%'
+                        }
+                    ]
                 });
 
+            },
+            animateCircle(line) {
+                var count = 0;
+                window.setInterval(function() {
+                    count = (count + 1) % 200;
+
+                    var icons = line.get('icons');
+                    icons[0].offset = (count / 2) + '%';
+                    line.set('icons', icons);
+                }, 20);
             }
         }
     }
