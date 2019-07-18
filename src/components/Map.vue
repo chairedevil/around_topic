@@ -81,7 +81,8 @@
                 markerArray: [],
                 latlngbounds: null,
                 loadingFlag: false,
-                geoFilterFlag: true
+                geoFilterFlag: true,
+                flightPath: null
             }
         },
         components: {
@@ -96,11 +97,12 @@
                     this.markerArray.forEach((value, index) => {
                         value.setMap(this.map);
                         console.log('drawMarker');
-                        if(this.screennmae){
-                            //this.drawLine();
-                        }
+                        
                     });
-
+                    if(this.screenname){
+                        this.drawLine();
+                        this.flightPath.setMap(this.map);
+                    }
                     this.centerPointer();
                 }
                 
@@ -221,14 +223,28 @@
                 }
             },
             drawLine(){
+                console.log('drawLine');
+                //console.log(this.markerArray);
+                if(this.flightPath){
+                    this.flightPath.setMap(null);
+                }
+                
                 let lineCoordinates = [];
-                var flightPath = new google.maps.Polyline({
+                this.markerArray.forEach( (value, index) => {
+                    lineCoordinates.push({
+                        lat: value.getPosition().lat(),
+                        lng: value.getPosition().lng()
+                    })
+                })
+                
+                this.flightPath = new google.maps.Polyline({
                     path: lineCoordinates,
                     geodesic: true,
-                    strokeColor: '#FF0000',
+                    strokeColor: '#ffab66',
                     strokeOpacity: 1.0,
                     strokeWeight: 2
                 });
+
             }
         }
     }

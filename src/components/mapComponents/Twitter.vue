@@ -60,7 +60,7 @@
 
                 axios.get(this.api)
                 .then((response) => {
-                    console.log(response.data);
+                    //console.log(response.data);
                     //response.data.forEach((value, key) => {
                     let responseObject;
                     if(screenname){

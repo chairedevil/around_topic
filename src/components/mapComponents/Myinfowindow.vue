@@ -73,6 +73,8 @@ export default {
 
             this.$store.dispatch('setTwitterScreenname', this.tweetScreenname);
             this.$store.dispatch('setTwitterAvatar', this.tweetProfileImage);
+
+            //this.$store.dispatch('setSearchbarValue', null);
         }
     }
 }
