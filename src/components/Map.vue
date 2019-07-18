@@ -100,9 +100,11 @@
                             //this.drawLine();
                         }
                     });
+
+                    this.centerPointer();
                 }
-                this.centerPointer();
-                this.map.setZoom(13);
+                
+                //this.map.setZoom(13);
             },
             centerLat(){
                 this.loadingFlag = true;
@@ -185,9 +187,10 @@
         },
         methods: {
             centerPointer(){
+                console.log('center!!');
                 this.latlngbounds = new google.maps.LatLngBounds();
                 this.markers.forEach((value, key) => {
-                    let markerLatlng = new google.maps.LatLng(value.lat,value.lng)
+                    let markerLatlng = new google.maps.LatLng(value.tweetMarkerLatitude,value.tweetMarkerLongitude);
                     this.latlngbounds.extend(markerLatlng);
                 });
                 this.map.fitBounds(this.latlngbounds);

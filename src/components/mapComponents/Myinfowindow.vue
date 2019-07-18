@@ -46,17 +46,31 @@
 import store from '../../store.js';
 export default {
     name: 'infoWindow',
+    data(){
+        return {
+            tweetGeoObject: null
+        }
+    },
     props: [
         'tweetUsername',
         'tweetScreenname',
         'tweetText',
         'tweetProfileImage',
-        'tweetDate'
+        'tweetDate',
+        'tweetLatitude',
+        'tweetLongitude'
     ],
     store,
     methods: {
         storeScreenname(){
             console.log('storeScreenname: '+this.tweetScreenname);
+
+            this.tweetGeoObject = {
+                lat: this.tweetLatitude,
+                lng: this.tweetLongitude
+            };
+            this.$store.dispatch('setSearchbarGeo', this.tweetGeoObject);
+
             this.$store.dispatch('setTwitterScreenname', this.tweetScreenname);
             this.$store.dispatch('setTwitterAvatar', this.tweetProfileImage);
         }
