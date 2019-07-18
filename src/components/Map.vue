@@ -29,8 +29,6 @@
         <template v-if="lat && lng">
             <template v-if="screenname">
                 <app-twitter 
-                    :twitterLat="centerLat"
-                    :twitterLng="centerLng"
                     :twitterScreenname="screenname"
                     :twitterGeoFilterFlag="geoFilterFlag"
                     @updateTweetResult=" markers = $event"></app-twitter>
@@ -115,9 +113,9 @@
             },
             loadingFlag(){
                 if(this.loadingFlag){
-                    //console.log('loading');
+                    console.log('loading');
                 }else{
-                    //console.log('loading done');
+                    console.log('loading done');
                 }
             },
             geoCheck(newVal, oldVal){
@@ -131,7 +129,8 @@
             geoCheck(){
                 return {
                     nowGeo: this.$store.state.nowGeo,
-                    searchbarGeo: this.$store.state.searchbarGeo
+                    searchbarGeo: this.$store.state.searchbarGeo,
+                    twitterScreenname: this.$store.state.twitterScreenname
                 }
             }
         },
@@ -158,11 +157,12 @@
         mounted() {
             //console.log('mounted');
             if(this.$store.state.nowGeo || this.$store.state.searchbarGeo || this.$store.state.twitterScreenname){
-                if(this.$store.state.searchbarValue){
+                this.setLatLngValue(this.$store.state);
+                /*if(this.$store.state.twitterScreenname){
                     this.screenname = this.$store.state.twitterScreenname;
                 }else{
                     this.setLatLngValue(this.$store.state);
-                }
+                }*/
             }
             
             /*this.$store.watch(
@@ -210,6 +210,10 @@
                 }else{
                     this.lat = geoObj.nowGeo.lat.toString();
                     this.lng = geoObj.nowGeo.lng.toString();
+                }
+
+                if(geoObj.twitterScreenname){
+                    this.screenname = geoObj.twitterScreenname;
                 }
             },
             drawLine(){

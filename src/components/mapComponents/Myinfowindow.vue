@@ -19,7 +19,7 @@
                                 <v-flex xs12>
                                     <div class="headline">{{ tweetUsername }}</div>
                                 </v-flex>
-                                <v-flex xs12 @click="storeScreenname">
+                                <v-flex xs12>
                                     <div class="grey--text">@{{ tweetScreenname }}</div>
                                 </v-flex>
                                 
@@ -34,7 +34,7 @@
                 <v-spacer></v-spacer>
                     <v-layout wrap>
                         <v-card-text>
-                            <div class="grey--text text-xs-right font-italic caption">{{ tweetDate }}</div>
+                            <div class="grey--text text-xs-right font-italic caption"> <span @click="storeScreenname"> <a href="#">Timeline</a>  </span> {{ tweetDate }}</div>
                         </v-card-text>
                     </v-layout>
                       
@@ -58,6 +58,7 @@ export default {
         storeScreenname(){
             console.log('storeScreenname: '+this.tweetScreenname);
             this.$store.dispatch('setTwitterScreenname', this.tweetScreenname);
+            //this.$store.dispatch('setTwitterAvatar', this.tweetProfileImage);
         }
     }
 }
