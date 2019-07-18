@@ -58,7 +58,7 @@ export default {
         storeScreenname(){
             console.log('storeScreenname: '+this.tweetScreenname);
             this.$store.dispatch('setTwitterScreenname', this.tweetScreenname);
-            //this.$store.dispatch('setTwitterAvatar', this.tweetProfileImage);
+            this.$store.dispatch('setTwitterAvatar', this.tweetProfileImage);
         }
     }
 }
