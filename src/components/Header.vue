@@ -45,6 +45,7 @@
               solo-inverted
               flat
               hide-details
+              clearable
           >
           </v-autocomplete>
           
@@ -102,6 +103,16 @@ export default {
     searchModel: function (newVal, oldVal) {
       if(newVal === oldVal) return
       if(newVal === '') return
+
+      //case of clear search's value
+      if(newVal == undefined){
+        this.$store.dispatch('setTwitterScreenname', null)
+        this.$store.dispatch('setSearchbarValue', null)
+        this.$store.dispatch('setSearchbarGeo', null)
+        return
+      }
+      console.log(newVal)
+
       fetch( config.apiserver + 'getgeo?chr=' + this.searchModel)
         .then(res => res.json())
         .then(res => {
