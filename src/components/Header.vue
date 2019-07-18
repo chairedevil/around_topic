@@ -50,6 +50,17 @@
           </v-autocomplete>
           
         </v-toolbar>
+
+        <div v-if="twitterScreenname != null" class="text-xs-center twitterUserBox">
+          <v-chip close
+            @input="handleCloseTwitterUserBox()"
+          >
+            <v-avatar>
+              <img :src="twitterAvatar" alt="trevor">
+            </v-avatar>
+            {{ twitterScreenname }}
+          </v-chip>
+        </div>
     </div>
 </template>
 <script>
@@ -84,9 +95,14 @@ export default {
     navigateTo (route) {
       this.$router.push(route)
     },
+    handleCloseTwitterUserBox() {
+      console.log("closed")
+      this.$store.dispatch('setTwitterScreenname', null)
+      this.$store.dispatch('setTwitterAvatar', null)
+    }
   },
   computed: {
-    ...mapState(['nowGeo', 'searchbarGeo', 'twitterScreenname'])
+    ...mapState(['nowGeo', 'searchbarGeo', 'twitterScreenname', 'twitterAvatar'])
   },
   watch: {
     searchValue: _.debounce(function(val) {
@@ -154,5 +170,14 @@ export default {
 <style scoped>
   .searchbar{
     width: 100%;
+  }
+  .twitterUserBox{
+    position: absolute;
+    top: 60px;
+    left: calc(50% - 50px);
+    z-index: 9999;
+  }
+  .twitterUserBox span{
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.50);
   }
 </style>
