@@ -55,6 +55,7 @@
 <script>
 import _ from 'lodash'
 import config from '../config'
+import { mapState } from 'vuex'
 
 export default {
   name: "Header",
@@ -83,6 +84,9 @@ export default {
     navigateTo (route) {
       this.$router.push(route)
     },
+  },
+  computed: {
+    ...mapState(['nowGeo', 'searchbarGeo', 'twitterScreenname'])
   },
   watch: {
     searchValue: _.debounce(function(val) {
@@ -115,7 +119,7 @@ export default {
       fetch( config.apiserver + 'getgeo?chr=' + this.searchModel)
         .then(res => res.json())
         .then(res => {
-          console.log("geo of searchbar value :", res.result.geometry.location)
+          //console.log("geo of searchbar value :", res.result.geometry.location)
           this.searchGeolocation = {lat:res.result.geometry.location.lat, lng:res.result.geometry.location.lng}
           
           this.$store.dispatch('setTwitterScreenname', null)
@@ -125,10 +129,15 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    twitterScreenname: function(newVal, oldVal){
+      //console.log(newVal)
+      //this.searchValue = newVal
+      //this.searchModel = newVal
     }
   },
   created () {
-    console.log("Header component was created")
+    //console.log("Header component was created")
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         console.log("Got current location")

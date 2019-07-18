@@ -9,7 +9,8 @@ export default new Vuex.Store({
     nowGeo: null,
     searchbarValue: null,
     searchbarGeo: null,
-    twitterScreenname: null
+    twitterScreenname: null,
+    twitterAvatar: null
   },
   mutations: {
     setNowGeo (state, nowGeo) {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     setTwitterScreenname (state, twitterScreenname) {
       state.twitterScreenname = twitterScreenname
+    },
+    setTwitterAvatar (state, twitterAvatar) {
+      state.twitterAvatar = twitterAvatar
     }
   },
   actions: {
@@ -37,6 +41,9 @@ export default new Vuex.Store({
     },
     setTwitterScreenname ({commit}, twitterScreenname) {
       commit('setTwitterScreenname', twitterScreenname)
+    },
+    setTwitterAvatar ({commit}, twitterAvatar) {
+      commit('setTwitterAvatar', twitterAvatar)
     }
   }
 })
