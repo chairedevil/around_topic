@@ -205,6 +205,7 @@
             setLatLngValue(geoObj){
                 this.centerLat = null;
                 this.centerLng = null;
+                this.screenname = null;
                 this.markerArray = [];
                 
                 if(geoObj.searchbarGeo){
