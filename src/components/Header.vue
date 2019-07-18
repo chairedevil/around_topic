@@ -111,7 +111,6 @@ export default {
         this.$store.dispatch('setSearchbarGeo', null)
         return
       }
-      console.log(newVal)
 
       fetch( config.apiserver + 'getgeo?chr=' + this.searchModel)
         .then(res => res.json())
