@@ -115,6 +115,9 @@
                     value.setMap(null);
                 });
                 this.markerArray = [];
+                if(this.flightPath){
+                    this.flightPath.setMap(null);
+                }
             },
             loadingFlag(){
                 if(this.loadingFlag){
@@ -125,7 +128,7 @@
             },
             geoCheck(newVal, oldVal){
                 if(newVal === oldVal) return
-
+                console.log('geoCheck');
                 this.setLatLngValue(newVal);
             },
         },
@@ -206,6 +209,7 @@
                 });
             },
             setLatLngValue(geoObj){
+                console.log('setLatLng');
                 this.centerLat = null;
                 this.centerLng = null;
                 this.screenname = null;
@@ -214,6 +218,7 @@
                 if(geoObj.searchbarGeo){
                     this.lat = geoObj.searchbarGeo.lat.toString();
                     this.lng = geoObj.searchbarGeo.lng.toString();
+                    console.log('here?');
                 }else{
                     this.lat = geoObj.nowGeo.lat.toString();
                     this.lng = geoObj.nowGeo.lng.toString();
