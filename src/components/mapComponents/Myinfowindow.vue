@@ -43,6 +43,7 @@
     </div>
 </template>
 <script>
+import store from '../../store.js';
 export default {
     name: 'infoWindow',
     props: [
@@ -52,8 +53,9 @@ export default {
         'tweetProfileImage',
         'tweetDate'
     ],
+    store,
     methods: {
-        storeScreenname: () => {
+        storeScreenname(){
             console.log('storeScreenname: '+this.tweetScreenname);
             this.$store.dispatch('setTwitterScreenname', this.tweetScreenname);
         }
