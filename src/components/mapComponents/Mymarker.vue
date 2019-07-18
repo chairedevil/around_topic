@@ -38,7 +38,7 @@ export default {
                     //url: this.markerPosition.tweetProfileImage,
                     scaledSize: new google.maps.Size(30, 30)
                 };
-                let markerLatlng = new google.maps.LatLng(this.markerPosition.tweetMarkerLatitude + Math.random()*0.000000001,this.markerPosition.tweetMarkerLogitude+ Math.random()*0.000000001)
+                let markerLatlng = new google.maps.LatLng(this.markerPosition.tweetMarkerLatitude + Math.random()*0.000000001,this.markerPosition.tweetMarkerLongitude+ Math.random()*0.000000001)
                 this.markerObject = new google.maps.Marker({
                     position: markerLatlng,
                     //map: this.markerMap,
@@ -55,7 +55,9 @@ export default {
                         tweetScreenname: this.markerPosition.tweetScreenname,
                         tweetText: this.markerPosition.tweetText.substring(0, this.markerPosition.tweetText.indexOf('https')),
                         tweetProfileImage: this.markerPosition.tweetProfileImage,
-                        tweetDate: this.markerPosition.tweetDate.substring(0, this.markerPosition.tweetDate.indexOf('+'))
+                        tweetDate: this.markerPosition.tweetDate.substring(0, this.markerPosition.tweetDate.indexOf('+')),
+                        tweetLatitude: this.markerPosition.tweetMarkerLatitude.toString(),
+                        tweetLongitude: this.markerPosition.tweetMarkerLongitude.toString()
                     }
                 });
 

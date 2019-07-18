@@ -81,7 +81,8 @@
                 markerArray: [],
                 latlngbounds: null,
                 loadingFlag: false,
-                geoFilterFlag: true
+                geoFilterFlag: true,
+                flightPath: null
             }
         },
         components: {
@@ -96,13 +97,17 @@
                     this.markerArray.forEach((value, index) => {
                         value.setMap(this.map);
                         console.log('drawMarker');
-                        if(this.screennmae){
-                            //this.drawLine();
-                        }
+                        
                     });
+                    if(this.screenname){
+                        this.drawLine();
+                        this.flightPath.setMap(this.map);
+                        this.animateCircle(this.flightPath);
+                    }
+                    this.centerPointer();
                 }
-                this.centerPointer();
-                this.map.setZoom(13);
+                
+                //this.map.setZoom(13);
             },
             centerLat(){
                 this.loadingFlag = true;
@@ -185,9 +190,10 @@
         },
         methods: {
             centerPointer(){
+                console.log('center!!');
                 this.latlngbounds = new google.maps.LatLngBounds();
                 this.markers.forEach((value, key) => {
-                    let markerLatlng = new google.maps.LatLng(value.lat,value.lng)
+                    let markerLatlng = new google.maps.LatLng(value.tweetMarkerLatitude,value.tweetMarkerLongitude);
                     this.latlngbounds.extend(markerLatlng);
                 });
                 this.map.fitBounds(this.latlngbounds);
@@ -202,6 +208,7 @@
             setLatLngValue(geoObj){
                 this.centerLat = null;
                 this.centerLng = null;
+                this.screenname = null;
                 this.markerArray = [];
                 
                 if(geoObj.searchbarGeo){
@@ -217,14 +224,65 @@
                 }
             },
             drawLine(){
+                console.log('drawLine');
+                //console.log(this.markerArray);
+                if(this.flightPath){
+                    this.flightPath.setMap(null);
+                }
+                
                 let lineCoordinates = [];
-                var flightPath = new google.maps.Polyline({
-                    path: lineCoordinates,
+                this.markerArray.forEach( (value, index) => {
+                    lineCoordinates.push({
+                        lat: value.getPosition().lat(),
+                        lng: value.getPosition().lng()
+                    })
+                })
+                
+                const symbol = {
+                    path: 'M 10,8 5,0 -8,0 -10,5 -7,5 -7,8 6,8 6,7z',
+                    strokeColor: '#F00',
+                    fillColor: '#F00',
+                    fillOpacity: 1,
+                    rotation: -90
+                };
+                this.flightPath = new google.maps.Polyline({
+                    path: lineCoordinates.reverse(),
                     geodesic: true,
-                    strokeColor: '#FF0000',
+                    strokeColor: '#ffab66',
                     strokeOpacity: 1.0,
-                    strokeWeight: 2
+                    strokeWeight: 2,
+                    icons: [
+                        {
+                            icon: symbol,
+                            offset: '0%'
+                        },
+                        /*{
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 5
+                            },
+                            offset: '0%'
+                        },*/
+                        {
+                            icon: {
+                                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                                scale: 5
+                            },
+                            offset: '100%'
+                        }
+                    ]
                 });
+
+            },
+            animateCircle(line) {
+                var count = 0;
+                window.setInterval(function() {
+                    count = (count + 1) % 200;
+
+                    var icons = line.get('icons');
+                    icons[0].offset = (count / 2) + '%';
+                    line.set('icons', icons);
+                }, 20);
             }
         }
     }

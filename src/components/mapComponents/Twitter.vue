@@ -21,7 +21,7 @@
                 tweetDate: '',
                 tweetText: '',
                 tweetMarkerLatitude: '',
-                tweetMarkerLogitude: '',
+                tweetMarkerLongitude: '',
                 geoFilterFlag: true
             }
         },
@@ -60,7 +60,7 @@
 
                 axios.get(this.api)
                 .then((response) => {
-                    console.log(response.data);
+                    //console.log(response.data);
                     //response.data.forEach((value, key) => {
                     let responseObject;
                     if(screenname){
@@ -75,10 +75,10 @@
                         if(this.geoFilterFlag){
                             if(!value.geo) return;
                             this.tweetMarkerLatitude = value.geo.coordinates[0];
-                            this.tweetMarkerLogitude = value.geo.coordinates[1];
+                            this.tweetMarkerLongitude = value.geo.coordinates[1];
                         }else{
                             this.tweetMarkerLatitude = null;
-                            this.tweetMarkerLogitude = null;
+                            this.tweetMarkerLongitude = null;
                         }
                         
                         this.tweetUsername = value.user.name;
@@ -101,7 +101,7 @@
                             tweetDate: this.tweetDate,
                             tweetText: this.tweetText,
                             tweetMarkerLatitude: this.tweetMarkerLatitude,
-                            tweetMarkerLogitude: this.tweetMarkerLogitude
+                            tweetMarkerLongitude: this.tweetMarkerLongitude
                         };
                         this.tweetResult.push(this.tweetObject);
                         
