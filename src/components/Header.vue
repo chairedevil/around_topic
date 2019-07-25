@@ -173,7 +173,7 @@ export default {
   }
   .twitterUserBox{
     position: absolute;
-    top: 60px;
+    top: 80px;
     left: calc(50% - 50px);
     z-index: 9999;
   }

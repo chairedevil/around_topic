@@ -12,10 +12,17 @@
             </apptwitter> 
         </template> -->
         <apptwitter
-            v-if="lat != null & lng != null"
+            v-if="lat != null & lng != null & twitterScreenname == null"
             :twitterLat="lat"
             :twitterLng="lng"
             :twitterGeoFilterFlag="geoFilterFlag"
+            @updateTweetResult = "tweetResults = $event"
+        >
+        </apptwitter>
+        <apptwitter
+            v-if="twitterScreenname != null"
+            :twitterGeoFilterFlag="geoFilterFlag"
+            :twitterScreenname="twitterScreenname"
             @updateTweetResult = "tweetResults = $event"
         >
         </apptwitter>
@@ -85,7 +92,7 @@ export default {
         searchbarGeo: function(){
             return this.$store.state.searchbarGeo
         }*/
-        ...mapState(['nowGeo', 'searchbarGeo'])
+        ...mapState(['nowGeo', 'searchbarGeo', 'twitterScreenname'])
     },
     mounted(){
         if(this.nowGeo!=null) this.geoCheck();
@@ -117,6 +124,10 @@ export default {
         tweetResults(newVal, oldVal){
             console.log(newVal);
             this.loadingFlg = false
+        },
+        twitterScreenname(newVal, oldVal){
+            console.log('screenname value:' + newVal)
+            this.loadingFlg = true
         }
     }
 }
