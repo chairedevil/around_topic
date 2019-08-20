@@ -1,24 +1,207 @@
 <template>
-    <v-layout column justify-center align-center class="banner">
-        <v-flex justify-center align-center>
-            <h1>あなただけの海外旅行を</h1>
-            <p>海外旅行で観光先に困ったとき、SNSから集めた大量のトレンド情報が<br>あなたを話題の観光スポットへ連れってくれます。</p>
-        </v-flex>
-        <v-flex>
-            <img src="../assets/landingPageImages/iphonex.png" alt="phone">
-        </v-flex>
+  <v-container fluid px-0 py-0 class="background">
+    <!-- main visual & heading -->
+    <v-layout column align-center class="banner">
+      <v-flex>
+        <h1 class="main-title white--text text-center">あなただけの海外旅行を</h1>
+        <p class="sub-title text-center">
+          海外旅行で観光先に困ったとき、SNSから集めた大量のトレンド情報が
+          <br />あなたを話題の観光スポットへ連れってくれます。
+        </p>
+      </v-flex>
+      <v-flex>
+        <img src="../assets/landingPageImages/iphonex.png" alt="phone" />
+      </v-flex>
     </v-layout>
+    <!-- d point members -->
+    <v-layout bg-white py-5 id="member-stores" class="member-stores">
+      <v-flex class="text-center">
+        <h1>dポイント加盟店</h1>
+        <v-sheet class="mx-auto" max-width="75%">
+          <v-slide-group>
+            <v-slide-item v-for="(item,i) in items" :key="i">
+              <img src="../assets/landingPageImages/member_store1.png" width="20%" />
+            </v-slide-item>
+          </v-slide-group>
+        </v-sheet>
+        <p class="my-5">
+          <a href="https://docomo-kaigai.com/kaigaidp/">加盟店の詳細はこちら</a>
+        </p>
+      </v-flex>
+    </v-layout>
+    <!-- features -->
+    <v-layout py-5>
+      <d-flex class="section-title">
+        <div class="section-title">
+          <small>FEATURES</small>
+          <h3>特徴</h3>
+        </div>
+        <div class="row px-4">
+          <div class="col-12 col-lg-4">
+            <div class="card features">
+              <div class="card-body">
+                <div class="media">
+                  <span class="ti-face-smile gradient-fill ti-3x mr-3"></span>
+                  <div class="media-body">
+                    <h4 class="card-title text-left">シンプル</h4>
+                    <p class="card-text text-left">事前登録なしで、簡単に使用することができます。検索方法も直感的でわかりやすくなっています。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="card features">
+              <div class="card-body">
+                <div class="media">
+                  <span class="ti-money gradient-fill ti-3x mr-3"></span>
+                  <div class="media-body">
+                    <h4 class="card-title text-left">無料</h4>
+                    <p
+                      class="card-text text-left"
+                    >初期費用も継続して使用していくのにも費用は一切かかりません。費用の心配なく使用し続けることができます。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="card features">
+              <div class="card-body">
+                <div class="media">
+                  <span class="ti-comments gradient-fill ti-3x mr-3"></span>
+                  <div class="media-body">
+                    <h4 class="card-title text-left">情報量</h4>
+                    <p
+                      class="card-text text-left"
+                    >SNSから集めた大量の情報からトレンドを提供します。また忖度のないユーザーの生の声を聴くことができます。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </d-flex>
+    </v-layout>
+    <!-- about this app -->
+    <v-layout bg-white>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-6">
+            <div class="box-icon">
+              <span class="ti-mobile gradient-fill ti-3x"></span>
+            </div>
+            <h2>Around Topicについて</h2>
+            <p class="mb-4">Around Topicは、あなたの海外旅行を便利にするアプリです。</p>
+            <a href="#function" class="btn btn-primary">Read more</a>
+          </div>
+        </div>
+        <div class="perspective-phone">
+          <img
+            src="../assets/landingPageImages/perspective.png"
+            alt="perspective phone"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </v-layout>
+    <!-- function -->
+    <v-layout py-5>
+      <div class="container-fluid">
+        <div class="section-title">
+          <small>FUNCTION</small>
+          <h3>機能一覧</h3>
+        </div>
+        <!-- <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#communication">位置検索</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#schedule">キーワード検索</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#messages">ユーザーの移動履歴</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#livechat">タイムライン</a>
+          </li>
+        </ul>-->
+      </div>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
 export default {
-      
-}
+  data() {
+    return {
+      tab: null,
+      items: [
+        { src: "../assets/landingPageImages/member_store1.png" },
+        { src: "../assets/landingPageImages/member_store2.png" },
+        { src: "../assets/landingPageImages/member_store3.png" },
+        { src: "../assets/landingPageImages/member_store4.png" },
+        { src: "../assets/landingPageImages/member_store5.png" },
+        { src: "../assets/landingPageImages/member_store6.png" },
+        { src: "../assets/landingPageImages/member_store7.png" },
+        { src: "../assets/landingPageImages/member_store8.png" },
+        { src: "../assets/landingPageImages/member_store9.png" },
+        { src: "../assets/landingPageImages/member_store10.png" },
+        { src: "../assets/landingPageImages/member_store12.png" },
+        { src: "../assets/landingPageImages/member_store13.png" },
+        { src: "../assets/landingPageImages/member_store14.png" },
+        { src: "../assets/landingPageImages/member_store15.png" },
+        { src: "../assets/landingPageImages/member_store17.png" },
+        { src: "../assets/landingPageImages/member_store18.png" },
+        { src: "../assets/landingPageImages/member_store19.png" },
+        { src: "../assets/landingPageImages/member_store20.png" },
+        { src: "../assets/landingPageImages/member_store21.png" },
+        { src: "../assets/landingPageImages/member_store22.png" }
+      ],
+      tabs: [
+        {
+          name: "位置検索",
+          heading: "位置情報からレビューを簡単検索",
+          content:
+            "海外旅行で予定していた観光スポットを見終わってしまって時間が余ってしまったことはありませんか？そんなとき、『AroundTopicの位置情報検索』を使えばもう大丈夫！ユーザの位置情報を利用し、ユーザ周辺の観光地レビューをSNSから取得してきます。マップに表示される検索結果は、他のユーザのアイコンが表示されるため、視覚的に注目が集まっている観光地を知ることができます。SNSから取得してくる情報は、最大7日間で投稿された情報なので、ほかのユーザの最新の声を知ることができます。<br>是非、Around Topicで時間を有効活用して、自分だけの観光スポットを見つけてください。"
+        },
+        {
+          name: "キーワード検索",
+          heading: "キーワードからレビューを簡単検索",
+          content:
+            "海外旅行で予定していた観光地に実際足を運んでみたら、退屈だったとことはありませんか？そんなとき、『AroundTopicのキーワード検索』を使えばもう大丈夫！キーワード検索には大きく分けて２つの使い方があります。<br>１つ目は、旅行前、観光プランを立てるとき気になる観光地を検索することで実際の忖度のない口コミを閲覧できます。<br>２つ目は、旅行中、現地で気になったスポットの口コミを閲覧できます。<br>是非、Around Topicで時間を有効活用して、自分だけの観光スポットを見つけてください。"
+        },
+        {
+          name: "ユーザーの移動履歴",
+          heading: "移動履歴から観光地を決める",
+          content:
+            "観光地のみではなく、移動の最中も存分に楽しみたいとは思いませんか？そんな時は、Around Topicの移動履歴機能が役に立ちます。AroundTopicではほかのユーザが通った観光地の履歴が見れます。<br>観光地までの道の迷ってしまったとき、時間に余裕があって少し寄り道をしながら観光地に向かいたいとき、観光地周辺の景色を堪能しながら移動したい時などに、とても役に立ちます。<br>ただし、悪用厳禁！ほかのユーザのストーカーなどには決して使わないでくださいね。（笑）"
+        },
+        {
+          name: "タイムライン",
+          heading: "Live chat when you needed",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu"
+        }
+      ]
+    };
+  }
+};
 </script>
 
 <style scoped>
-    .banner{
-        background-image: linear-gradient(#25b7c0, #9aede4);
-        padding-top: 100px;
-    }
+.background {
+  background-color: #faf6fb;
+}
+.banner {
+  background-image: linear-gradient(#25b7c0, #9aede4);
+  padding-top: 100px;
+}
+.main-title {
+  font-size: 5em;
+}
+.sub-title {
+  color: #ffc535;
+  font-size: 1.5em;
+}
 </style>
