@@ -13,9 +13,9 @@
     <v-layout bg-white py-5 id="member-stores" class="member-stores">
       <v-flex class="text-center">
         <h1>dポイント加盟店</h1>
-        <v-sheet class="mx-auto" max-width="75%">
-          <v-slide-group>
-            <v-slide-item v-for="(item,i) in items" :key="i">
+        <v-sheet class="mx-auto member-stores-wrapper">
+          <v-slide-group multiple show-arrows>
+            <v-slide-item v-for="item in items" :key="item">
               <img src="../assets/landingPageImages/member_store1.png" width="20%" />
             </v-slide-item>
           </v-slide-group>
@@ -222,6 +222,7 @@
 export default {
   data() {
     return {
+      model: null,
       tab: null,
       items: [
         { src: "../assets/landingPageImages/member_store1.png" },
@@ -294,6 +295,9 @@ export default {
   font-size: 2em;
   color: #ffc535;
 }
+.member-stores-wrapper {
+  width: 75%;
+}
 @media screen and (max-width: 980px) {
   .mainvisual-heading {
     width: 100%;
@@ -303,6 +307,9 @@ export default {
   }
   .mainvisual-heading > p {
     font-size: 1.5em;
+  }
+  .member-stores-wrapper {
+    width: 100%;
   }
 }
 @media screen and (max-width: 600px) {
@@ -314,6 +321,9 @@ export default {
   }
   .mainvisual-heading > p {
     font-size: 1.2em;
+  }
+  .member-stores-wrapper {
+    width: 100%;
   }
 }
 </style>
