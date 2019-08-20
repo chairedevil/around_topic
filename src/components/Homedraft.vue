@@ -1,17 +1,13 @@
 <template>
-  <v-container fluid px-0 py-0 class="background">
+  <v-container fluid px-0 py-0 class="site-bg">
     <!-- main visual & heading -->
+    <!-- ok! -->
     <v-layout column align-center class="banner">
-      <v-flex>
-        <h1 class="main-title white--text text-center">あなただけの海外旅行を</h1>
-        <p class="sub-title text-center">
-          海外旅行で観光先に困ったとき、SNSから集めた大量のトレンド情報が
-          <br />あなたを話題の観光スポットへ連れってくれます。
-        </p>
+      <v-flex class="mainvisual-heading">
+        <h1 class="white--text text-center">あなただけの海外旅行を</h1>
+        <p class="sub-title text-center">海外旅行で観光先に困ったとき、SNSから集めた大量のトレンド情報があなたを話題の観光スポットへ連れてってくれます。</p>
       </v-flex>
-      <v-flex>
-        <img src="../assets/landingPageImages/iphonex.png" alt="phone" />
-      </v-flex>
+      <img src="../assets/landingPageImages/iphonex.png" alt="phone" />
     </v-layout>
     <!-- d point members -->
     <v-layout bg-white py-5 id="member-stores" class="member-stores">
@@ -207,7 +203,7 @@
         </div>
       </div>
     </v-layout>
-    <footer class="my-5 text-center">
+    <v-footer class="my-5 text-center">
       <!-- Copyright removal is not prohibited! -->
       <p class="mb-2">
         <small>COPYRIGHT © 2019. Around Topic</small>
@@ -218,7 +214,7 @@
         <a href="#" class="m-2">TERMS</a>
         <a href="#" class="m-2">PRIVACY</a>
       </small>
-    </footer>
+    </v-footer>
   </v-container>
 </template>
 
@@ -281,18 +277,43 @@ export default {
 </script>
 
 <style scoped>
-.background {
+.site-bg {
   background-color: #faf6fb;
 }
 .banner {
   background-image: linear-gradient(#25b7c0, #9aede4);
   padding-top: 100px;
 }
-.main-title {
-  font-size: 5em;
+.mainvisual-heading {
+  width: 75%;
 }
-.sub-title {
+.mainvisual-heading > h1 {
+  font-size: 5.5em;
+}
+.mainvisual-heading > p {
+  font-size: 2em;
   color: #ffc535;
-  font-size: 1.5em;
+}
+@media screen and (max-width: 980px) {
+  .mainvisual-heading {
+    width: 100%;
+  }
+  .mainvisual-heading > h1 {
+    font-size: 3.5em;
+  }
+  .mainvisual-heading > p {
+    font-size: 1.5em;
+  }
+}
+@media screen and (max-width: 600px) {
+  .mainvisual-heading {
+    width: 100%;
+  }
+  .mainvisual-heading > h1 {
+    font-size: 2.5em;
+  }
+  .mainvisual-heading > p {
+    font-size: 1.2em;
+  }
 }
 </style>
