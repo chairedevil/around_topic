@@ -128,6 +128,97 @@
         </ul>-->
       </div>
     </v-layout>
+    <!-- Q&A -->
+    <v-layout>
+      <div class="container">
+        <div class="section-title">
+          <small>FAQ</small>
+          <h3>よくあるご質問</h3>
+        </div>
+
+        <div class="row pt-4">
+          <div class="col-md-6">
+            <h4 class="mb-3">どのようなサービスなのですか？</h4>
+            <p
+              class="light-font mb-5"
+            >twitterから観光地やレストランなどに関する情報（ツイート）を取得することで、忖度のないユーザーの生の声を聴くことができ旅行のサポートをします。</p>
+            <h4 class="mb-3">使うのに費用はかかりますか？</h4>
+            <p class="light-font mb-5">当サービスを使用するのに、お金は一切かかりません。</p>
+          </div>
+          <div class="col-md-6">
+            <h4 class="mb-3">使う際に何か登録する必要がありますか？</h4>
+            <p
+              class="light-font mb-5"
+            >当サービスを使用するのに、ログインなど何か登録する必要は一切ございません。サイト上に行けば使用できますのでお気軽に使ってみてください。</p>
+            <h4 class="mb-3">検索方法はどのようなものがありますか？</h4>
+            <p class="light-font mb-5">ご自身の位置情報または場所のキーワードでの検索が可能です。</p>
+          </div>
+        </div>
+      </div>
+    </v-layout>
+    <!--  -->
+    <v-layout class="section bg-gradient" id="download">
+      <div class="container">
+        <div class="call-to-action">
+          <div class="box-icon">
+            <span class="ti-mobile gradient-fill ti-3x"></span>
+          </div>
+          <h2>Around Topicを使ってみよう！</h2>
+          <p class="tagline">
+            <a href="#" class="btn btn-warning font-weight-bold">使ってみる</a>
+          </p>
+        </div>
+      </div>
+    </v-layout>
+    <!-- support -->
+    <v-layout class="light-bg py-5" id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 text-center text-lg-left">
+            <p class="mb-2">
+              <span class="ti-location-pin mr-2"></span> 1485 Pacific St, Brooklyn, NY 11216 USA
+            </p>
+            <div class="d-block d-sm-inline-block">
+              <p class="mb-2">
+                <span class="ti-email mr-2"></span>
+                <a class="mr-4" href="mailto:support@mobileapp.com">support@mobileapp.com</a>
+              </p>
+            </div>
+            <div class="d-block d-sm-inline-block">
+              <p class="mb-0">
+                <span class="ti-headphone-alt mr-2"></span>
+                <a href="tel:51836362800">518-3636-2800</a>
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="social-icons">
+              <a href="#">
+                <span class="ti-facebook"></span>
+              </a>
+              <a href="#">
+                <span class="ti-twitter-alt"></span>
+              </a>
+              <a href="#">
+                <span class="ti-instagram"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </v-layout>
+    <footer class="my-5 text-center">
+      <!-- Copyright removal is not prohibited! -->
+      <p class="mb-2">
+        <small>COPYRIGHT © 2019. Around Topic</small>
+      </p>
+
+      <small>
+        <a href="#" class="m-2">PRESS</a>
+        <a href="#" class="m-2">TERMS</a>
+        <a href="#" class="m-2">PRIVACY</a>
+      </small>
+    </footer>
   </v-container>
 </template>
 
