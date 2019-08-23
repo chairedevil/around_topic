@@ -153,6 +153,31 @@
             <a class="nav-link" data-toggle="tab" href="#livechat">タイムライン</a>
           </li>
         </ul>-->
+        <v-toolbar color="purple lighten-4" dark tabs>
+          <v-tabs v-model="tab" color="purple lighten-4" grow>
+            <v-tabs-slider color="pink lighten-3"></v-tabs-slider>
+            <v-tab v-for="item in items" :key="item" class="font-weight-bold">{{ item.name }}</v-tab>
+          </v-tabs>
+        </v-toolbar>
+        <v-tabs-items v-model="tab">
+          <v-tab-item v-for="item in items" :key="item">
+            <v-card flat>
+              <v-card-text>
+                <v-container grid-list-md text-xs-center>
+                  <v-layout row wrap>
+                    <v-flex lg3 class="text-center">
+                      <v-img :src="item.src" width="150px" />
+                    </v-flex>
+                    <v-flex lg9 text-left>
+                      <h1 class="item-title">{{ item.title }}</h1>
+                      <p class="item-content">{{ item.content }}</p>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
       </div>
     </v-layout>
     <!-- review -->
@@ -215,7 +240,7 @@
           </div>
           <h2>Around Topicを使ってみよう！</h2>
           <p class="tagline">
-            <a href="#" class="btn btn-warning font-weight-bold">使ってみる</a>
+            <a href="/map" class="btn btn-warning font-weight-bold">使ってみる</a>
           </p>
         </div>
       </div>
@@ -276,37 +301,35 @@
 export default {
   data() {
     return {
-      model: null,
       tab: null,
       items: [
-        { src: "../assets/landingPageImages/members1.png" },
-        { src: "../assets/landingPageImages/members2.png" },
-        { src: "../assets/landingPageImages/members3.png" }
-      ],
-      tabs: [
         {
+          src: require("../assets/landingPageImages/graphic.png"),
           name: "位置検索",
-          heading: "位置情報からレビューを簡単検索",
+          title: "位置情報からレビューを簡単検索",
           content:
-            "海外旅行で予定していた観光スポットを見終わってしまって時間が余ってしまったことはありませんか？そんなとき、『AroundTopicの位置情報検索』を使えばもう大丈夫！ユーザの位置情報を利用し、ユーザ周辺の観光地レビューをSNSから取得してきます。マップに表示される検索結果は、他のユーザのアイコンが表示されるため、視覚的に注目が集まっている観光地を知ることができます。SNSから取得してくる情報は、最大7日間で投稿された情報なので、ほかのユーザの最新の声を知ることができます。<br>是非、Around Topicで時間を有効活用して、自分だけの観光スポットを見つけてください。"
+            "海外旅行で予定していた観光スポットを見終わってしまって時間が余ってしまったことはありませんか？そんなとき、AroundTopicの位置情報検索 を使えばもう大丈夫！ユーザの位置情報を利用し、ユーザ周辺の観光地レビューをSNSから取得してきます。マップに表示される検索結果は、他のユーザのアイコンが表示されるため、視覚的に注目が集まっている観光地を知ることができます。SNSから取得してくる情報は、最大7日間で投稿された情報なので、ほかのユーザの最新の声を知ることができます。是非、Around Topicで時間を有効活用して、自分だけの観光スポットを見つけてください。"
         },
         {
+          src: require("../assets/landingPageImages/graphic.png"),
           name: "キーワード検索",
-          heading: "キーワードからレビューを簡単検索",
+          title: "キーワードからレビューを簡単検索",
           content:
-            "海外旅行で予定していた観光地に実際足を運んでみたら、退屈だったとことはありませんか？そんなとき、『AroundTopicのキーワード検索』を使えばもう大丈夫！キーワード検索には大きく分けて２つの使い方があります。<br>１つ目は、旅行前、観光プランを立てるとき気になる観光地を検索することで実際の忖度のない口コミを閲覧できます。<br>２つ目は、旅行中、現地で気になったスポットの口コミを閲覧できます。<br>是非、Around Topicで時間を有効活用して、自分だけの観光スポットを見つけてください。"
+            "海外旅行で予定していた観光地に実際足を運んでみたら、退屈だったとことはありませんか？そんなとき、AroundTopicのキーワード検索を使えばもう大丈夫！キーワード検索には、大きく分けて２つの使い方があります。１つ目は、旅行前、観光プランを立てるとき気になる観光地を検索することで実際の忖度のない口コミを閲覧できます。２つ目は、旅行中、現地で気になったスポットの口コミを閲覧できます。是非、Around Topicで時間を有効活用して、自分だけの観光スポットを見つけてください。"
         },
         {
+          src: require("../assets/landingPageImages/graphic.png"),
           name: "ユーザーの移動履歴",
-          heading: "移動履歴から観光地を決める",
+          title: "移動履歴から観光地を決める",
           content:
-            "観光地のみではなく、移動の最中も存分に楽しみたいとは思いませんか？そんな時は、Around Topicの移動履歴機能が役に立ちます。AroundTopicではほかのユーザが通った観光地の履歴が見れます。<br>観光地までの道の迷ってしまったとき、時間に余裕があって少し寄り道をしながら観光地に向かいたいとき、観光地周辺の景色を堪能しながら移動したい時などに、とても役に立ちます。<br>ただし、悪用厳禁！ほかのユーザのストーカーなどには決して使わないでくださいね。（笑）"
+            "観光地のみではなく、移動の最中も存分に楽しみたいとは思いませんか？そんな時は、Around Topicの移動履歴機能が役に立ちます。AroundTopicではほかのユーザが通った観光地の履歴が見れます。観光地までの道の迷ってしまったとき、時間に余裕があって少し寄り道をしながら観光地に向かいたいとき、観光地周辺の景色を堪能しながら移動したい時などに、とても役に立ちます。ただし、悪用厳禁！ほかのユーザのストーカーなどには決して使わないでくださいね。（笑）"
         },
         {
+          src: require("../assets/landingPageImages/graphic.png"),
           name: "タイムライン",
-          heading: "Live chat when you needed",
+          title: "タイムラインから観光地を探す",
           content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu"
+            "気になる観光地の最新情報をいち早く知りたくは、ありませんか？そんな時はAround Topicにのタイムライン機能が役に立ちます。タイムライン機能では、検索結果を日付順にリスト化することができ、最新の情報をいち早く閲覧することができます。タイムラインで気になる情報を見つけて、その情報をMapで確認することもできます。お客様が旅行の楽しみや思い出を投稿するば他のユーザとの共有もできるので、旅行をすることがさらに楽しくなります。"
         }
       ]
     };
@@ -340,6 +363,14 @@ export default {
 }
 .client-img {
   border-radius: 200px;
+}
+.item-title {
+  color: #633991;
+}
+.item-content {
+  color: #959094;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
 }
 @media screen and (max-width: 980px) {
   .mainvisual-heading {
