@@ -13,13 +13,44 @@
     <v-layout bg-white py-5 id="member-stores" class="member-stores">
       <v-flex class="text-center">
         <h1>dポイント加盟店</h1>
-        <v-sheet class="mx-auto member-stores-wrapper">
+        <!-- <v-sheet class="mx-auto member-stores-wrapper">
           <v-slide-group multiple show-arrows>
             <v-slide-item v-for="item in items" :key="item">
               <img src="../assets/landingPageImages/member_store1.png" width="20%" />
             </v-slide-item>
           </v-slide-group>
-        </v-sheet>
+        </v-sheet>-->
+        <v-carousel
+          light
+          cycle
+          height="200"
+          hide-delimiters
+          show-arrows-on-hover
+          hide-controls
+          class="members-wrap"
+        >
+          <v-carousel-item>
+            <v-sheet height="100%" :color="transparent">
+              <v-row class="fill-height" align="center" justify="center">
+                <img src="../assets/landingPageImages/members1.png" />
+              </v-row>
+            </v-sheet>
+          </v-carousel-item>
+          <v-carousel-item>
+            <v-sheet height="100%">
+              <v-row class="fill-height" align="center" justify="center">
+                <img src="../assets/landingPageImages/members2.png" />
+              </v-row>
+            </v-sheet>
+          </v-carousel-item>
+          <v-carousel-item>
+            <v-sheet height="100%">
+              <v-row class="fill-height" align="center" justify="center">
+                <img src="../assets/landingPageImages/members3.png" />
+              </v-row>
+            </v-sheet>
+          </v-carousel-item>
+        </v-carousel>
         <p class="my-5">
           <a href="https://docomo-kaigai.com/kaigaidp/">加盟店の詳細はこちら</a>
         </p>
@@ -80,7 +111,7 @@
       </d-flex>
     </v-layout>
     <!-- about this app -->
-    <v-layout bg-white>
+    <!-- <v-layout bg-white>
       <div class="container">
         <div class="row">
           <div class="col-lg-6 offset-lg-6">
@@ -100,9 +131,9 @@
           />
         </div>
       </div>
-    </v-layout>
+    </v-layout>-->
     <!-- function -->
-    <v-layout py-5>
+    <v-layout py-5 bg-white>
       <div class="container-fluid">
         <div class="section-title">
           <small>FUNCTION</small>
@@ -124,8 +155,31 @@
         </ul>-->
       </div>
     </v-layout>
+    <!-- review -->
+    <v-layout py-5>
+      <v-flex>
+        <div class="section-title">
+          <small>INTRODUCTION</small>
+          <h3>お客様の声</h3>
+        </div>
+        <div class="testimonials-single">
+          <img
+            src="../assets/landingPageImages/client.png"
+            alt="client"
+            class="client-img"
+            width="20%"
+          />
+          <blockquote class="blockquote">
+            いつも海外旅行に行く際は、雑誌やネットで調べた有名な観光地に行っていましたが、同じようなな動きばかりで飽きていました。そんな時にAround
+            Topicを使い現地の人の生の声を知ることができ、今までとは違った海外旅行をすることができました。旅行先で、空いた時間などに近くの観光地について簡単に調べることができるので、時間を有効に使うこともできました。
+          </blockquote>
+          <h5 class="mt-4 mb-2">浜一等兵</h5>
+          <p class="text-primary">United States</p>
+        </div>
+      </v-flex>
+    </v-layout>
     <!-- Q&A -->
-    <v-layout>
+    <v-layout bg-white>
       <div class="container">
         <div class="section-title">
           <small>FAQ</small>
@@ -225,26 +279,9 @@ export default {
       model: null,
       tab: null,
       items: [
-        { src: "../assets/landingPageImages/member_store1.png" },
-        { src: "../assets/landingPageImages/member_store2.png" },
-        { src: "../assets/landingPageImages/member_store3.png" },
-        { src: "../assets/landingPageImages/member_store4.png" },
-        { src: "../assets/landingPageImages/member_store5.png" },
-        { src: "../assets/landingPageImages/member_store6.png" },
-        { src: "../assets/landingPageImages/member_store7.png" },
-        { src: "../assets/landingPageImages/member_store8.png" },
-        { src: "../assets/landingPageImages/member_store9.png" },
-        { src: "../assets/landingPageImages/member_store10.png" },
-        { src: "../assets/landingPageImages/member_store12.png" },
-        { src: "../assets/landingPageImages/member_store13.png" },
-        { src: "../assets/landingPageImages/member_store14.png" },
-        { src: "../assets/landingPageImages/member_store15.png" },
-        { src: "../assets/landingPageImages/member_store17.png" },
-        { src: "../assets/landingPageImages/member_store18.png" },
-        { src: "../assets/landingPageImages/member_store19.png" },
-        { src: "../assets/landingPageImages/member_store20.png" },
-        { src: "../assets/landingPageImages/member_store21.png" },
-        { src: "../assets/landingPageImages/member_store22.png" }
+        { src: "../assets/landingPageImages/members1.png" },
+        { src: "../assets/landingPageImages/members2.png" },
+        { src: "../assets/landingPageImages/members3.png" }
       ],
       tabs: [
         {
@@ -295,8 +332,14 @@ export default {
   font-size: 2em;
   color: #ffc535;
 }
-.member-stores-wrapper {
-  width: 75%;
+.members-wrap {
+  height: 200px;
+}
+.members-wrap img {
+  width: 50%;
+}
+.client-img {
+  border-radius: 200px;
 }
 @media screen and (max-width: 980px) {
   .mainvisual-heading {
@@ -308,8 +351,12 @@ export default {
   .mainvisual-heading > p {
     font-size: 1.5em;
   }
-  .member-stores-wrapper {
-    width: 100%;
+  .members-wrap {
+    height: 100px;
+    box-shadow: none;
+  }
+  .members-wrap img {
+    width: 90%;
   }
 }
 @media screen and (max-width: 600px) {
@@ -322,7 +369,7 @@ export default {
   .mainvisual-heading > p {
     font-size: 1.2em;
   }
-  .member-stores-wrapper {
+  .members-wrap img {
     width: 100%;
   }
 }
