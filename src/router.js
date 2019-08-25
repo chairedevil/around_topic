@@ -11,11 +11,10 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'home2',
+      component: Home2
     },
     {
       path: '/map',
@@ -29,8 +28,8 @@ export default new Router({
     },
     {
       path: '/home2',
-      name: 'home2',
-      component: Home2
+      name: 'home',
+      component: Home
     },
   ]
 })
