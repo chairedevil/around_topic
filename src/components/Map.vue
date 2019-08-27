@@ -234,8 +234,15 @@
                     strokeOpacity: 1.0,
                     strokeWeight: 2,
                     icons: [
-                        {
+                        /*{
                             icon: symbol,
+                            offset: '0%'
+                        },*/
+                        {
+                            icon: {
+                                path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW,
+                                scale: 5
+                            },
                             offset: '0%'
                         },
                         {
