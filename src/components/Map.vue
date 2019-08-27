@@ -240,7 +240,7 @@
                         },*/
                         {
                             icon: {
-                                path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW,
+                                path: google.maps.SymbolPath.CIRCLE,
                                 scale: 5
                             },
                             offset: '0%'
